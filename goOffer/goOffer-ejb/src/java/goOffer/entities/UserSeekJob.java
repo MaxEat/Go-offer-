@@ -6,6 +6,7 @@
 package goOffer.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,20 +22,70 @@ public class UserSeekJob implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userSeekJobID;
+    private long jobID;
+    private long userID;
+    private Calendar applicationDate;
+
+    public Calendar getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(Calendar applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+
+    /**
+     * Get the value of userID
+     *
+     * @return the value of userID
+     */
+    public long getUserID() {
+        return userID;
+    }
+
+    /**
+     * Set the value of userID
+     *
+     * @param userID new value of userID
+     */
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
+
+    /**
+     * Get the value of jobID
+     *
+     * @return the value of jobID
+     */
+    public long getJobID() {
+        return jobID;
+    }
+
+    /**
+     * Set the value of jobID
+     *
+     * @param jobID new value of jobID
+     */
+    public void setJobID(long jobID) {
+        this.jobID = jobID;
+    }
+
 
     public Long getId() {
-        return id;
+        return userSeekJobID;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.userSeekJobID = userSeekJobID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (userSeekJobID != null ? userSeekJobID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +96,7 @@ public class UserSeekJob implements Serializable {
             return false;
         }
         UserSeekJob other = (UserSeekJob) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.userSeekJobID == null && other.userSeekJobID != null) || (this.userSeekJobID != null && !this.userSeekJobID.equals(other.userSeekJobID))) {
             return false;
         }
         return true;
@@ -53,7 +104,7 @@ public class UserSeekJob implements Serializable {
 
     @Override
     public String toString() {
-        return "goOffer.entities.UserSeekJob[ id=" + id + " ]";
+        return "goOffer.entities.UserSeekJob[ userSeekJobID=" + userSeekJobID + " ]";
     }
     
 }

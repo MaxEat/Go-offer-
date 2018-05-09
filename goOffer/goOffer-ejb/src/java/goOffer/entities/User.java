@@ -21,20 +21,61 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userID;   
+    private String userName;   
+    private String passward;
+    
 
-    public Long getId() {
-        return id;
+    /**
+     * Get the value of passward
+     *
+     * @return the value of passward
+     */
+    public String getPassward() {
+        return passward;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    /**
+     * Set the value of passward
+     *
+     * @param passward new value of passward
+     */
+    public void setPassward(String passward) {
+        this.passward = passward;
+    }
+
+
+    /**
+     * Get the value of userName
+     *
+     * @return the value of userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * Set the value of userName
+     *
+     * @param userName new value of userName
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+
+    public Long getId() {
+        return userID;
+    }
+
+    public void setId(Long userID) {
+        this.userID = userID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (userID != null ? userID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +86,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.userID == null && other.userID != null) || (this.userID != null && !this.userID.equals(other.userID))) {
             return false;
         }
         return true;
@@ -53,7 +94,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "goOffer.entities.User[ id=" + id + " ]";
+        return "goOffer.entities.User[ userID=" + userID + " ]";
     }
     
 }
