@@ -6,6 +6,7 @@
 package goOffer.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,20 +22,121 @@ public class Job implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long jobID;    
+    private String jobName;   
+    private String location;    
+    private long companyID;
+    private String description;
+    JobClassification jobclassification;
+    protected Calendar expirationDate;
 
-    public Long getId() {
-        return id;
+    public JobClassification getJobclassification() {
+        return jobclassification;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setJobclassification(JobClassification jobclassification) {
+        this.jobclassification = jobclassification;
+    }
+
+    public Calendar getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Calendar expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+
+    /**
+     * Get the value of description
+     *
+     * @return the value of description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @param description new value of description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
+    
+
+    /**
+     * Get the value of companyID
+     *
+     * @return the value of companyID
+     */
+    public long getCompanyID() {
+        return companyID;
+    }
+
+    /**
+     * Set the value of companyID
+     *
+     * @param companyID new value of companyID
+     */
+    public void setCompanyID(long companyID) {
+        this.companyID = companyID;
+    }
+
+
+    /**
+     * Get the value of location
+     *
+     * @return the value of location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Set the value of location
+     *
+     * @param location new value of location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+
+    /**
+     * Get the value of jobName
+     *
+     * @return the value of jobName
+     */
+    public String getJobName() {
+        return jobName;
+    }
+
+    /**
+     * Set the value of jobName
+     *
+     * @param jobName new value of jobName
+     */
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+
+    public Long getId() {
+        return jobID;
+    }
+
+    public void setId(Long jobID) {
+        this.jobID = jobID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (jobID != null ? jobID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +147,7 @@ public class Job implements Serializable {
             return false;
         }
         Job other = (Job) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.jobID == null && other.jobID != null) || (this.jobID != null && !this.jobID.equals(other.jobID))) {
             return false;
         }
         return true;
@@ -53,7 +155,7 @@ public class Job implements Serializable {
 
     @Override
     public String toString() {
-        return "goOffer.entities.Job[ id=" + id + " ]";
+        return "goOffer.entities.Job[ jobID=" + jobID + " ]";
     }
     
 }
