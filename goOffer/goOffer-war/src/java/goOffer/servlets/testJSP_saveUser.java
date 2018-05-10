@@ -9,6 +9,7 @@ import goOffer.ejbs.dealWithUsers;
 import goOffer.entities.Usertable;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,28 +38,18 @@ public class testJSP_saveUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet testJSP_saveUser</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<UL>\n"
-//                    + " <LI><B>username</B>: "
-//                    + request.getParameter("username") + "\n"
-//                    + " <LI><B>password</B>: "
-//                    + request.getParameter("password") + "\n"
-//                    + "</UL>\n");
-//            out.println("</body>");
-//            out.println("</html>");
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Usertable newUser = new Usertable();
         newUser.setUsername(username);
         newUser.setPassword(password);
         dealWithUsers.addNewUser(newUser);
-        response.sendRedirect("userSaveSuccess.jsp");
+        
+        //List<Usertable> users = dealWithUsers.getAllUsers();
+        //response.sendRedirect("userSaveSuccess.jsp");
+        //request.setAttribute("users", users);
+        request.getRequestDispatcher("http://localhost/goOffer-war/userSaveSuccess.jsp").forward(request, response);
         }
     }
 

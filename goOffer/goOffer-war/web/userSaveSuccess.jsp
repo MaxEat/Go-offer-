@@ -4,6 +4,8 @@
     Author     : jiahao pan 
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="goOffer.entities.Usertable"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +14,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>user saved!</h1>
+        <table border="1">
+            <tr>
+                <td>id</td>
+                <td>username</td>
+                <td>password</td>
+            </tr>
+
     </body>
 </html>
