@@ -4,9 +4,17 @@
         <servlet-name>welcomePage</servlet-name>
         <servlet-class>goOffer.servlets.welcomePage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>testJSP_saveUser</servlet-name>
+        <servlet-class>goOffer.servlets.testJSP_saveUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>welcomePage</servlet-name>
         <url-pattern>/welcomePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testJSP_saveUser</servlet-name>
+        <url-pattern>/testJSP_saveUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,6 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>testJSP.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

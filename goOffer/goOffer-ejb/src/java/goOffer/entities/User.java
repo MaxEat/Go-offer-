@@ -23,25 +23,25 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userID;   
     private String userName;   
-    private String passward;
+    private String password;
     
 
     /**
-     * Get the value of passward
+     * Get the value of password
      *
-     * @return the value of passward
+     * @return the value of password
      */
     public String getPassward() {
-        return passward;
+        return password;
     }
 
     /**
-     * Set the value of passward
+     * Set the value of password
      *
-     * @param passward new value of passward
+     * @param passward new value of password
      */
     public void setPassward(String passward) {
-        this.passward = passward;
+        this.password = passward;
     }
 
 

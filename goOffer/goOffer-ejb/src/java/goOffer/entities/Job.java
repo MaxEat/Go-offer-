@@ -27,16 +27,16 @@ public class Job implements Serializable {
     private String location;    
     private long companyID;
     private String description;
-    JobClassification jobclassification;
+    //JobClassification jobclassification;
     protected Calendar expirationDate;
 
-    public JobClassification getJobclassification() {
-        return jobclassification;
-    }
-
-    public void setJobclassification(JobClassification jobclassification) {
-        this.jobclassification = jobclassification;
-    }
+//    public JobClassification getJobclassification() {
+//        return jobclassification;
+//    }
+//
+//    public void setJobclassification(JobClassification jobclassification) {
+//        this.jobclassification = jobclassification;
+//    }
 
     public Calendar getExpirationDate() {
         return expirationDate;

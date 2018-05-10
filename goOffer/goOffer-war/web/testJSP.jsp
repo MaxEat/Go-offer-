@@ -14,8 +14,14 @@
     <body>
         <h1>Let's test our JSP</h1>
 
-        <form action="main.jsp" method="POST">
-            
+        <form action="testJSP_saveUser" method="POST">
+            <center>
+            userName: <input type="text" name="username">
+            </br>
+            password: <input type="password" name="password">
+            </br>
+            <input type="submit" value="submit">
+            </center>
         </form>
     </body>
 </html>
