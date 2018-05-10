@@ -4,6 +4,7 @@
     Author     : jiahao pan 
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="goOffer.entities.Usertable"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,6 +21,18 @@
                 <td>username</td>
                 <td>password</td>
             </tr>
+            <%
+                List<Usertable> users = (List)request.getAttribute("users");
+                for (Usertable u : users) {
+            %>
+            <tr>
+                <td><%=u.getUserid()%></td>
+                <td><%=u.getUsername()%></td>
+                <td><%=u.getPassword()%></td>
+                <%
+                    }
+                %>
+        </table>
 
     </body>
 </html>

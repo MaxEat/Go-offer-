@@ -46,10 +46,10 @@ public class testJSP_saveUser extends HttpServlet {
         newUser.setPassword(password);
         dealWithUsers.addNewUser(newUser);
         
-        //List<Usertable> users = dealWithUsers.getAllUsers();
-        //response.sendRedirect("userSaveSuccess.jsp");
-        //request.setAttribute("users", users);
-        request.getRequestDispatcher("http://localhost/goOffer-war/userSaveSuccess.jsp").forward(request, response);
+        List<Usertable> users = dealWithUsers.getAllUsers();
+//        response.sendRedirect("userSaveSuccess.jsp");
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("userSaveSuccess.jsp").forward(request, response);
         }
     }
 
