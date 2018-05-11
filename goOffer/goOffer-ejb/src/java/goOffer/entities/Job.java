@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT u FROM Job u")
+    , @NamedQuery(name = "Job.deleteByID", query = "DELETE FROM Job u WHERE u.jobID = :jobID")
     , @NamedQuery(name = "Job.findByCompany", query = "SELECT u FROM Job u WHERE u.companyID = :companyID")})
 public class Job implements Serializable {
 

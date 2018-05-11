@@ -32,12 +32,18 @@
                 <td><%=u.getLocation()%></td>
                 <td><%=u.getDescription()%></td>
                 <td><%=u.getExpirationDate()%></td>
+                <td>
+                    <form action="servlet_company_deleteJob" method="POST">
+                        <input type="hidden" name=jobID value=<%=u.getId()%>>
+                        <input type="submit" name=operations value=delete>
+                    </form>
+                </td>
                 <%
                     }
                 %>
         </table>
         <%
-            if (request.getAttribute("addNewJob")== "set") {
+            if (request.getAttribute("addNewJob") == "set") {
         %>
         <form action="servlet_company_addJob" method="POST">
             job name: <input type="text" name="jobName">
@@ -45,6 +51,7 @@
             location: <input type="text" name="location">
             </br>
             description: <input type="text" name="description">
+            expiration date: <input type="date" name="expirationDate">
             </br>
             <input type="submit" value="submit">
         </form>

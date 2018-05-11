@@ -6,11 +6,8 @@
 package goOffer.servlets;
 
 import goOffer.ejbs.dealWithJobs;
-import goOffer.entities.Job;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jiahao pan
  */
-public class servlet_company_addJob extends HttpServlet {
+public class servlet_company_deleteJob extends HttpServlet {
 
     @EJB
     private dealWithJobs dealWithJobs;
@@ -40,20 +37,8 @@ public class servlet_company_addJob extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            String jobName = request.getParameter("jobName");
-            String location = request.getParameter("location");
-            String description = request.getParameter("description");
-//            Date date = new Date(request.getParameter("expirationDate"));
-//            Calendar expirationDate = Calendar.getInstance();
-//            expirationDate.setTime(date);
-            Job newjob = new Job();
-            newjob.setCompanyID(1);
-            newjob.setDescription(description);
-            newjob.setLocation(location);
-            newjob.setJobName(jobName);
-//            newjob.setExpirationDate(expirationDate);
-            dealWithJobs.addNewJob(newjob);
+            long jobID = Long.parseLong(request.getParameter("jobID"));
+            dealWithJobs.deleteJobWithJobID(jobID);
             
             response.sendRedirect("servlet_company_overview");
         }

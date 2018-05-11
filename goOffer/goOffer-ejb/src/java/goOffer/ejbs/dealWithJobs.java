@@ -30,8 +30,15 @@ public class dealWithJobs {
         return jobList;
     }
     
-    public void addNewUser(Job newJob) {
+    public void addNewJob(Job newJob) {
         em.persist(newJob);
+    }
+    
+    public void deleteJobWithJobID(long jobID)
+    {
+        em.createNamedQuery("Job.deleteByID")
+                .setParameter("jobID", jobID)
+                .executeUpdate();
     }
 
     public void persist(Object object) {
