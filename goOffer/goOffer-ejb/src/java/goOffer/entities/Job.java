@@ -6,7 +6,7 @@
 package goOffer.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +34,7 @@ public class Job implements Serializable {
     private long companyID;
     private String description;
     //JobClassification jobclassification;
-    protected Calendar expirationDate;
+    private Date expirationDate;
     
     
 
@@ -49,11 +49,11 @@ public class Job implements Serializable {
     public Job() {
     }
 
-    public Calendar getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Calendar expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 

@@ -51,7 +51,7 @@
             location: <input type="text" name="location">
             </br>
             description: <input type="text" name="description">
-            expiration date: <input type="date" name="expirationDate">
+            expiration date: <input type="datetime-local" name="expirationDate">
             </br>
             <input type="submit" value="submit">
         </form>
