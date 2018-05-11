@@ -5,8 +5,12 @@
  */
 package goOffer.servlets;
 
+import goOffer.ejbs.dealWithJobs;
+import goOffer.entities.Job;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author jiahao pan
  */
 public class servlet_company_overview extends HttpServlet {
+
+    @EJB
+    private dealWithJobs dealWithJobs;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +38,16 @@ public class servlet_company_overview extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet servlet_company_overview</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet servlet_company_overview at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+            String temp = request.getParameter("operations");
+            request.setAttribute("addNewJob", "notSet");
+            if ("addNewJob".equals(temp)) {
+                request.setAttribute("addNewJob", "set");
+            }
+
+            List<Job> jobs = dealWithJobs.getAllJobsByCompanyID(1);
+            request.setAttribute("jobs", jobs);
+            request.getRequestDispatcher("jsp_company_overview.jsp").forward(request, response);
         }
     }
 

@@ -5,8 +5,11 @@
  */
 package goOffer.servlets;
 
+import goOffer.ejbs.dealWithJobs;
+import goOffer.entities.Job;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jiahao pan
  */
-public class welcomePage extends HttpServlet {
+public class servlet_company_addJob extends HttpServlet {
+
+    @EJB
+    private dealWithJobs dealWithJobs;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,15 +38,18 @@ public class welcomePage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet welcomePage</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet welcomePage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            String jobName = request.getParameter("jobName");
+            String location = request.getParameter("location");
+            String description = request.getParameter("description");
+            Job newjob = new Job();
+            newjob.setCompanyID(1);
+            newjob.setDescription(description);
+            newjob.setLocation(location);
+            newjob.setJobName(jobName);
+            dealWithJobs.addNewUser(newjob);
+            
+            response.sendRedirect("servlet_company_overview");
         }
     }
 
