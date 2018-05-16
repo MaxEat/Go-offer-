@@ -23,11 +23,15 @@ public class test_login {
     private EntityManager em;
 
     public boolean loginControl(String username, String password) {
-        Logintest l = em.createNamedQuery("Logintest.control", Logintest.class).setParameter("username", username).setParameter("password", password).getSingleResult();
-        if (l != null) {
-            return true;
+        try {
+            Logintest l = em.createNamedQuery("Logintest.control", Logintest.class).setParameter("username", username).setParameter("password", password).getSingleResult();
+            if (l != null) {
+                return true;
+            }
+            return false;
+        } catch(Exception e)  {
+            return false;
         }
-        return false;
     }
 
     public void persist(Object object) {
