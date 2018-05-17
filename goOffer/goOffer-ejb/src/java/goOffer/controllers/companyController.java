@@ -7,6 +7,7 @@ package goOffer.controllers;
 
 import goOffer.ejbs.dealWithJobs;
 import goOffer.entities.Job;
+import goOffer.entities.Job.jobType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -34,14 +35,32 @@ public class companyController implements Serializable {
     private Boolean addFormShown = false;
 
     private List<Job> jobs = dealWithJobs.getAllJobsByCompanyID(1);
+    private jobType[] types = jobType.values();
 
     private String jobName;
     private String jobLocation;
     private String jobDescription;
     private Date jobExpirationDate;
+    private jobType chosenType;
+
+    public jobType getChosenType() {
+        return chosenType;
+    }
+
+    public void setChosenType(jobType chosenType) {
+        this.chosenType = chosenType;
+    }
 
     public String getJobName() {
         return jobName;
+    }
+
+    public jobType[] getTypes() {
+        return types;
+    }
+
+    public void setTypes(jobType[] types) {
+        this.types = types;
     }
 
     public void setJobName(String jobName) {
@@ -112,6 +131,7 @@ public class companyController implements Serializable {
         newjob.setLocation(jobLocation);
         newjob.setJobName(jobName);
         newjob.setExpirationDate(jobExpirationDate);
+        newjob.setType(chosenType);
         dealWithJobs.addNewJob(newjob);
 
         jobs = dealWithJobs.getAllJobsByCompanyID(1);

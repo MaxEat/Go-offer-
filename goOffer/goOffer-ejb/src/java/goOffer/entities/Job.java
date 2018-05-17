@@ -24,7 +24,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT u FROM Job u")
     , @NamedQuery(name = "Job.deleteByID", query = "DELETE FROM Job u WHERE u.jobID = :jobID")
-    , @NamedQuery(name = "Job.findByCompany", query = "SELECT u FROM Job u WHERE u.companyID = :companyID")})
+    , @NamedQuery(name = "Job.findByCompany", query = "SELECT u FROM Job u WHERE u.companyID = :companyID")
+    , @NamedQuery(name = "Job.findByJobType", query = "SELECT u FROM Job u WHERE u.type = :type")})
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +41,8 @@ public class Job implements Serializable {
     private String description;
     private Date expirationDate;
     
-//    @Enumerated(EnumType.STRING)
-//    private jobType type;
+    @Enumerated(EnumType.STRING)
+    private jobType type;
     
     public Job() {
     }
@@ -54,13 +55,13 @@ public class Job implements Serializable {
         this.jobID = jobID;
     }
     
-//    public jobType getType() {
-//        return type;
-//    }
-//
-//    public void setType(jobType type) {
-//        this.type = type;
-//    }
+    public jobType getType() {
+        return type;
+    }
+
+    public void setType(jobType type) {
+        this.type = type;
+    }
 
     public Date getExpirationDate() {
         return expirationDate;

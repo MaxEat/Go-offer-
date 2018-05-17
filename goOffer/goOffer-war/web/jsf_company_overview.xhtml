@@ -11,22 +11,43 @@
         <f:view>
             <h:form id="dataTableForm">
                 <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.jobs}" var="job">
+                    <f:facet name="header">
+                        <h:outputText value="My Offering Jobs:" />
+                    </f:facet>
                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>	
                         <h:outputText value="#{job.jobID}"/>
                     </h:column>
                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>	
                         <h:outputText value="#{job.jobName}"/>
                     </h:column>
                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Location"/>
+                        </f:facet>	
                         <h:outputText value="#{job.location}"/>
                     </h:column>
                     <h:column>
-                        <h:outputText value="#{job.companyID}"/>
+                        <f:facet name="header">
+                            <h:outputText value="Type"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.type}"/>
                     </h:column>
                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>	
                         <h:outputText value="#{job.description}"/>
                     </h:column>
                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Expiration Date"/>
+                        </f:facet>	
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
@@ -49,6 +70,12 @@
             <h:outputText value="Location:"/>
             <br/>
             <h:inputText value="#{company_overview.jobLocation}"/>
+            <br/>
+            <h:outputText value="Job Type:"/>
+            <br/>
+            <h:selectOneMenu value="#{company_overview.chosenType}">
+                <f:selectItems value="#{company_overview.types}" />
+            </h:selectOneMenu>
             <br/>
             <h:outputText value="Description:"/>
             <br/>
