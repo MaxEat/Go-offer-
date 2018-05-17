@@ -5,8 +5,8 @@
  */
 package goOffer.ejbs;
 
+import goOffer.entities.Company;
 import goOffer.entities.Job;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -18,23 +18,31 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class dealWithJobs {
+public class dealWithCompanies {
 
     @PersistenceContext(unitName = "goOffer-ejbPU")
     private EntityManager em;
-   
     
-    public void deleteJobWithJobID(long jobID)
-    {
-        em.createNamedQuery("Job.deleteByID")
-                .setParameter("jobID", jobID)
-                .executeUpdate();
+    public Company getCompanyByCompanyID(long companyID) {
+        
+          return em.find(Company.class, companyID);
     }
+    
+    public void addJobToCompanyByID(long companyID, Job job){
+        Company c = getCompanyByCompanyID(companyID);
+        c.addJobToCompany(job);
+    }
+    
+    public void removeJobFromCompanyByID(long companyID, long jobID) {
+        Company c = getCompanyByCompanyID(companyID);
+        c.removeJobFromCompany(jobID);
+    }
+    
+    
 
     public void persist(Object object) {
         em.persist(object);
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
 }

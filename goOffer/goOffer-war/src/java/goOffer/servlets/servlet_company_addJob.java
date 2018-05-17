@@ -56,12 +56,12 @@ public class servlet_company_addJob extends HttpServlet {
             Date expirationDate = sdf.parse(dateStr);
 
             Job newjob = new Job();
-            newjob.setCompanyID(1);
+//            newjob.setCompanyID(1);
             newjob.setDescription(description);
             newjob.setLocation(location);
             newjob.setJobName(jobName);
             newjob.setExpirationDate(expirationDate);
-            dealWithJobs.addNewJob(newjob);
+            //dealWithJobs.addNewJob(newjob);
             
             response.sendRedirect("servlet_company_overview");
         } catch (ParseException ex) {

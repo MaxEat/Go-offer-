@@ -45,8 +45,8 @@ public class servlet_company_overview extends HttpServlet {
                 request.setAttribute("addNewJob", "set");
             }
 
-            List<Job> jobs = dealWithJobs.getAllJobsByCompanyID(1);
-            request.setAttribute("jobs", jobs);
+//            List<Job> jobs = dealWithJobs.getAllJobsByCompanyID(1);
+//            request.setAttribute("jobs", jobs);
             request.getRequestDispatcher("jsp_company_overview.jsp").forward(request, response);
         }
     }

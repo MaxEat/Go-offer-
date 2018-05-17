@@ -7,24 +7,30 @@ package goOffer.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author ASUS
  */
 @Entity
+@Table(name = "Job")
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT u FROM Job u")
     , @NamedQuery(name = "Job.deleteByID", query = "DELETE FROM Job u WHERE u.jobID = :jobID")
-    , @NamedQuery(name = "Job.findByCompany", query = "SELECT u FROM Job u WHERE u.companyID = :companyID")
+//    , @NamedQuery(name = "Job.findByCompany", query = "SELECT u FROM Job u WHERE u.companyID = :companyID")
     , @NamedQuery(name = "Job.findByJobType", query = "SELECT u FROM Job u WHERE u.type = :type")})
 public class Job implements Serializable {
 
@@ -34,13 +40,17 @@ public class Job implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long jobID;    
-    private String jobName;   
+    private Long jobID;   
+    @Column
+    private String jobName;
+    @Column
     private String location;    
-    private long companyID;
+    //private long companyID;
+    @Column
     private String description;
+    @Column
     private Date expirationDate;
-    
+    @Column
     @Enumerated(EnumType.STRING)
     private jobType type;
     
@@ -98,18 +108,18 @@ public class Job implements Serializable {
      *
      * @return the value of companyID
      */
-    public long getCompanyID() {
-        return companyID;
-    }
-
-    /**
-     * Set the value of companyID
-     *
-     * @param companyID new value of companyID
-     */
-    public void setCompanyID(long companyID) {
-        this.companyID = companyID;
-    }
+//    public long getCompanyID() {
+//        return companyID;
+//    }
+//
+//    /**
+//     * Set the value of companyID
+//     *
+//     * @param companyID new value of companyID
+//     */
+//    public void setCompanyID(long companyID) {
+//        this.companyID = companyID;
+//    }
 
 
     /**

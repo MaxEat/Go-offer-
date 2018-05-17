@@ -5,7 +5,9 @@
  */
 package goOffer.controllers;
 
+import goOffer.ejbs.dealWithCompanies;
 import goOffer.ejbs.dealWithJobs;
+import goOffer.entities.Company;
 import goOffer.entities.Job;
 import goOffer.entities.Job.jobType;
 import java.io.Serializable;
@@ -29,20 +31,48 @@ import javax.naming.NamingException;
 @SessionScoped
 public class companyController implements Serializable {
 
+    dealWithCompanies dealWithCompanies = lookupdealWithCompaniesBean();
     dealWithJobs dealWithJobs = lookupdealWithJobsBean();
 
     private Boolean addButtonShown = true;
     private Boolean addFormShown = false;
 
-    private List<Job> jobs = dealWithJobs.getAllJobsByCompanyID(1);
-    private jobType[] types = jobType.values();
+    private List<Job> jobs;
+    private jobType[] types;
+    private String companyName;
+    private String companyAddress;
 
     private String jobName;
     private String jobLocation;
     private String jobDescription;
     private Date jobExpirationDate;
     private jobType chosenType;
+    
+    public companyController(){
+        jobs = dealWithCompanies.getCompanyByCompanyID(1).getJobs();
+        types = jobType.values();
+        companyName = dealWithCompanies.getCompanyByCompanyID(1).getCompanyName();
+        companyAddress = dealWithCompanies.getCompanyByCompanyID(1).getAddress();
+        
+    }
 
+    
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
+    
     public jobType getChosenType() {
         return chosenType;
     }
@@ -126,15 +156,15 @@ public class companyController implements Serializable {
         addFormShown = false;
 
         Job newjob = new Job();
-        newjob.setCompanyID(1);
         newjob.setDescription(jobDescription);
         newjob.setLocation(jobLocation);
         newjob.setJobName(jobName);
         newjob.setExpirationDate(jobExpirationDate);
         newjob.setType(chosenType);
-        dealWithJobs.addNewJob(newjob);
-
-        jobs = dealWithJobs.getAllJobsByCompanyID(1);
+        
+        dealWithCompanies.addJobToCompanyByID(1, newjob);
+        
+        jobs = dealWithCompanies.getCompanyByCompanyID(1).getJobs();
 
         return "jsf_company_overview.xhtml?faces-redirect=true";
     }
@@ -143,9 +173,10 @@ public class companyController implements Serializable {
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         long deleteID = Integer.parseInt(params.get("deleteJobID"));
+        dealWithCompanies.removeJobFromCompanyByID(1, deleteID);
         dealWithJobs.deleteJobWithJobID(deleteID);
-
-        jobs = dealWithJobs.getAllJobsByCompanyID(1);
+        
+        jobs = dealWithCompanies.getCompanyByCompanyID(1).getJobs();
 
         return "jsf_company_overview.xhtml?faces-redirect=true";
     }
@@ -154,6 +185,16 @@ public class companyController implements Serializable {
         try {
             Context c = new InitialContext();
             return (dealWithJobs) c.lookup("java:global/goOffer/goOffer-ejb/dealWithJobs!goOffer.ejbs.dealWithJobs");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private dealWithCompanies lookupdealWithCompaniesBean() {
+        try {
+            Context c = new InitialContext();
+            return (dealWithCompanies) c.lookup("java:global/goOffer/goOffer-ejb/dealWithCompanies!goOffer.ejbs.dealWithCompanies");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
