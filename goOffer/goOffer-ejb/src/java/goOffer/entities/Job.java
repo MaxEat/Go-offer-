@@ -32,6 +32,14 @@ public class Job implements Serializable {
     private String jobName;   
     private String location;    
     private long companyID;
+
+    public Long getJobID() {
+        return jobID;
+    }
+
+    public void setJobID(Long jobID) {
+        this.jobID = jobID;
+    }
     private String description;
     //JobClassification jobclassification;
     private Date expirationDate;
@@ -136,13 +144,7 @@ public class Job implements Serializable {
     }
 
 
-    public Long getId() {
-        return jobID;
-    }
-
-    public void setId(Long jobID) {
-        this.jobID = jobID;
-    }
+    
 
     @Override
     public int hashCode() {

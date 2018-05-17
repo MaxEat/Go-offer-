@@ -27,14 +27,14 @@
                 for (Job u : jobs) {
             %>
             <tr>
-                <td><%=u.getId()%></td>
+                <td><%=u.getJobID()%></td>
                 <td><%=u.getJobName()%></td>
                 <td><%=u.getLocation()%></td>
                 <td><%=u.getDescription()%></td>
                 <td><%=u.getExpirationDate()%></td>
                 <td>
                     <form action="servlet_company_deleteJob" method="POST">
-                        <input type="hidden" name=jobID value=<%=u.getId()%>>
+                        <input type="hidden" name=jobID value=<%=u.getJobID()%>>
                         <input type="submit" name=operations value=delete>
                     </form>
                 </td>

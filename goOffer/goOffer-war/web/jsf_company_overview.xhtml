@@ -1,12 +1,67 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <f:view>
+            <h:form id="dataTableForm">
+                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.jobs}" var="job">
+                    <h:column>
+                        <h:outputText value="#{job.jobID}"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{job.jobName}"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{job.location}"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{job.companyID}"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{job.description}"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{job.expirationDate}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="delete" action="#{company_overview.deleteJob()}">
+                            <f:param name="deleteJobID" value="#{job.jobID}" />
+                        </h:commandButton>
+                    </h:column>   
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        <h:form>
+            <h:commandButton value="Add New Job" rendered="#{company_overview.addButtonShown}" action="#{company_overview.addButtonListener()}"/>
+        </h:form>
+        <h:form rendered="#{company_overview.addFormShown}">
+            <br/>
+            <h:outputText value="Job name:"/>
+            <br/>
+            <h:inputText value="#{company_overview.jobName}" />
+            <br/>
+            <h:outputText value="Location:"/>
+            <br/>
+            <h:inputText value="#{company_overview.jobLocation}"/>
+            <br/>
+            <h:outputText value="Description:"/>
+            <br/>
+            <h:inputText value="#{company_overview.jobDescription}"/>
+            <br/>
+            <h:outputText value="Expiration Date:"/>
+            <br/>
+            <h:inputText t:type="datetime-local" value="#{company_overview.jobExpirationDate}">
+                <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm"/>
+            </h:inputText>
+            <br/>
+            <h:commandButton value="Submit"  action="#{company_overview.addNewJob()}"/>
+        </h:form>
     </h:body>
 </html>
 

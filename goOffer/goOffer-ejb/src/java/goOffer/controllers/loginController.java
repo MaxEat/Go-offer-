@@ -30,7 +30,7 @@ public class loginController implements Serializable {
     
     public String loginControl() {
         if (test_login.loginControl(username, password)){
-            return "test_home.xhtml?faces-redirect=true";
+            return "jsf_company_overview.xhtml?faces-redirect=true";
         }
         return "test_error.xhtml?faces-redirect=true";
     }
