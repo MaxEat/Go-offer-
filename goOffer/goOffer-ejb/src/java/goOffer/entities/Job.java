@@ -8,6 +8,8 @@ package goOffer.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,12 +28,23 @@ import javax.persistence.NamedQuery;
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    public enum jobType {MANAGER, PROGRAMMER, HR};
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long jobID;    
     private String jobName;   
     private String location;    
     private long companyID;
+    private String description;
+    private Date expirationDate;
+    
+//    @Enumerated(EnumType.STRING)
+//    private jobType type;
+    
+    public Job() {
+    }
 
     public Long getJobID() {
         return jobID;
@@ -40,22 +53,14 @@ public class Job implements Serializable {
     public void setJobID(Long jobID) {
         this.jobID = jobID;
     }
-    private String description;
-    //JobClassification jobclassification;
-    private Date expirationDate;
     
-    
-
-//    public JobClassification getJobclassification() {
-//        return jobclassification;
+//    public jobType getType() {
+//        return type;
 //    }
 //
-//    public void setJobclassification(JobClassification jobclassification) {
-//        this.jobclassification = jobclassification;
+//    public void setType(jobType type) {
+//        this.type = type;
 //    }
-    
-    public Job() {
-    }
 
     public Date getExpirationDate() {
         return expirationDate;

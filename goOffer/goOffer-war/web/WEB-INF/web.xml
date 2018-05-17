@@ -51,7 +51,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/test_login.xhtml</welcome-file>
+        <welcome-file>faces/jsf_company_overview.xhtml</welcome-file>
         <!--<welcome-file>servlet_company_overview</welcome-file>-->
     </welcome-file-list>
 </web-app>
