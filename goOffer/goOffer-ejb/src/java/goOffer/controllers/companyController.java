@@ -172,7 +172,7 @@ public class companyController implements Serializable {
     public String deleteJob() {
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        long deleteID = Integer.parseInt(params.get("deleteJobID"));
+        long deleteID = Long.parseLong(params.get("deleteJobID"));
         dealWithCompanies.removeJobFromCompanyByID(1, deleteID);
         dealWithJobs.deleteJobWithJobID(deleteID);
         

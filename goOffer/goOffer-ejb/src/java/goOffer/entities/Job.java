@@ -44,7 +44,6 @@ public class Job implements Serializable {
     private String jobName;
     @Column
     private String location;    
-    //private long companyID;
     @Column
     private String description;
     @Column

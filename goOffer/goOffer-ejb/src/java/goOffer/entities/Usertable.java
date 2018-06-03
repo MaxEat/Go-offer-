@@ -40,7 +40,7 @@ public class Usertable implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "USERID")
-    private Integer userid;
+    private Long userid;
     @Basic(optional = false)
     @Column(name = "USERNAME")
     private String username;
@@ -55,21 +55,21 @@ public class Usertable implements Serializable {
     public Usertable() {
     }
 
-    public Usertable(Integer userid) {
+    public Usertable(Long userid) {
         this.userid = userid;
     }
 
-    public Usertable(Integer userid, String username, String password) {
+    public Usertable(Long userid, String username, String password) {
         this.userid = userid;
         this.username = username;
         this.password = password;
     }
 
-    public Integer getUserid() {
+    public Long getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
+    public void setUserid(Long userid) {
         this.userid = userid;
     }
 
