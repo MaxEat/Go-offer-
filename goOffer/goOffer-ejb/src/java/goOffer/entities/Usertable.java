@@ -6,12 +6,16 @@
 package goOffer.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -43,6 +47,10 @@ public class Usertable implements Serializable {
     @Basic(optional = false)
     @Column(name = "PASSWORD")
     private String password;
+    
+    @ManyToMany
+    @JoinTable(name="UsersAndJobs")
+    private List<Job> appliedJobs;
 
     public Usertable() {
     }
@@ -79,6 +87,42 @@ public class Usertable implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Job> getAppliedJobs() {
+        return appliedJobs;
+    }
+
+    public void setAppliedJobs(List<Job> appliedJobs) {
+        this.appliedJobs = appliedJobs;
+    }
+    
+    public void addJob(Job newJob){
+        appliedJobs.add(newJob);
+        if (!newJob.getAppliedUsers().contains(this)) {
+            newJob.getAppliedUsers().add(this);
+        }
+    }
+    
+    public void removeJob(long jobID) {
+        Job removedJob = new Job();
+        
+        for (Job job : appliedJobs) {
+            if (job.getJobID() == jobID) {
+                removedJob = job;
+                appliedJobs.remove(job);
+                break;
+            }
+        }
+        
+        List<Usertable> list = removedJob.getAppliedUsers();
+        for (Usertable u : list) {
+            if (Objects.equals(u.getUserid(), this.userid)) {
+                list.remove(u);
+                break;
+            }   
+        }
+
     }
 
     @Override

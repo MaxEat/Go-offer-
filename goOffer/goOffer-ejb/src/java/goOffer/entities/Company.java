@@ -97,10 +97,6 @@ public class Company implements Serializable {
         this.id = id;
     }
 
-    public void addJobToCompany(Job job) {
-        jobs.add(job);
-    }
-
     public void removeJobFromCompany(long jobID) {
         for (Iterator<Job> iter = jobs.listIterator(); iter.hasNext();) {
             Job j = iter.next();

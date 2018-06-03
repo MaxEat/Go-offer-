@@ -7,7 +7,7 @@ package goOffer.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,8 +15,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -53,8 +52,21 @@ public class Job implements Serializable {
     @Column
     @Enumerated(EnumType.STRING)
     private jobType type;
+   
+    
+    @ManyToMany(mappedBy="appliedJobs")
+    private List<Usertable> appliedUsers;
+    
     
     public Job() {
+    }
+    
+    public List<Usertable> getAppliedUsers() {
+        return appliedUsers;
+    }
+
+    public void setAppliedUsers(List<Usertable> appliedUsers) {
+        this.appliedUsers = appliedUsers;
     }
 
     public Long getJobID() {
@@ -80,6 +92,9 @@ public class Job implements Serializable {
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    
+    
 
 
     /**

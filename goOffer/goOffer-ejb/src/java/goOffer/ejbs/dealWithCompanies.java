@@ -30,7 +30,7 @@ public class dealWithCompanies {
     
     public void addJobToCompanyByID(long companyID, Job job){
         Company c = getCompanyByCompanyID(companyID);
-        c.addJobToCompany(job);
+        c.getJobs().add(job);
     }
     
     public void removeJobFromCompanyByID(long companyID, long jobID) {

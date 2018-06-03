@@ -5,6 +5,7 @@
  */
 package goOffer.ejbs;
 
+import goOffer.entities.Job;
 import goOffer.entities.Usertable;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -23,8 +24,6 @@ public class dealWithUsers {
     @PersistenceContext(unitName = "goOffer-ejbPU")
     private EntityManager em;
     
-     // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     public List getAllUsers() {
         List userList = em.createNamedQuery("Usertable.findAll").getResultList();
@@ -34,8 +33,20 @@ public class dealWithUsers {
     public void addNewUser(Usertable newUser) {
         em.persist(newUser);
     }
+    
+    
+    public Usertable findUserByUserID(long userID){
+        return em.find(Usertable.class, userID);
+    }
 
-   
+    public void addNewJobToUserByUserID(long userID, Job newJob) {
+        Usertable u = findUserByUserID(userID);
+        u.addJob(newJob);
+    }
+    
+    public void removeJobFromUserByID(long userID, long jobID) {
+        
+    }
 
     public void persist(Object object) {
         em.persist(object);
