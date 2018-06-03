@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package goOffer.controllers;
+
 import goOffer.ejbs.test_login;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -18,21 +19,34 @@ import javax.naming.NamingException;
  *
  * @author jiahao pan
  */
-
-@ManagedBean(name = "logintest")
+@ManagedBean(name = "userlogin")
 @SessionScoped
 public class loginController implements Serializable {
 
-    test_login test_login = lookuptest_loginBean();
-    
     private String username;
     private String password;
-    
-    public String loginControl() {
-        if (test_login.loginControl(username, password)){
-            return "jsf_company_overview.xhtml?faces-redirect=true";
+    private String result;
+
+    public String callWebServiceLogin() {
+        result = login(username, password);
+        if ((login(username, password)).equals("exist")) {
+            return "jsf_user_overview.xhtml";
+        } else {
+            return "test_login.xhtml?faces-redirect=true";
         }
-        return "test_error.xhtml?faces-redirect=true";
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    
+    public void callWebServiceRegister() {
+        result = register(username, password);
     }
 
     public String getUsername() {
@@ -51,14 +65,26 @@ public class loginController implements Serializable {
         this.password = password;
     }
 
-    private test_login lookuptest_loginBean() {
+    private static String login(java.lang.String name, java.lang.String password) {
         try {
-            Context c = new InitialContext();
-            return (test_login) c.lookup("java:global/goOffer/goOffer-ejb/test_login!goOffer.ejbs.test_login");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
+            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
+            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
+            return port.login(name, password);
+        } catch (Exception ex) {
+            return ex.toString();
+        }
+
+    }
+
+    private static String register(java.lang.String name, java.lang.String password) {
+        try {
+
+            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
+            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
+            return port.register(name, password);
+        } catch (Exception ex) {
+            return ex.toString();
         }
     }
-    
+
 }

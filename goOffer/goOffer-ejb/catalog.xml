@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/46411/Desktop/loginRegister.wsdl" uri="src/conf/xml-resources/web-services/LoginService/wsdl/loginRegister.wsdl"/>
+    <system systemId="http://localhost:53547/LoginService/LoginService?wsdl" uri="src/conf/xml-resources/web-service-references/LoginService/wsdl/localhost_53547/LoginService/LoginService.wsdl"/>
+</catalog>

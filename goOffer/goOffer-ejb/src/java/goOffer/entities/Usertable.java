@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usertable.findAll", query = "SELECT u FROM Usertable u")
     , @NamedQuery(name = "Usertable.findByUserid", query = "SELECT u FROM Usertable u WHERE u.userid = :userid")
     , @NamedQuery(name = "Usertable.findByUsername", query = "SELECT u FROM Usertable u WHERE u.username = :username")
-    , @NamedQuery(name = "Usertable.findByPassword", query = "SELECT u FROM Usertable u WHERE u.password = :password")})
+    , @NamedQuery(name = "Usertable.findByPassword", query = "SELECT u FROM Usertable u WHERE u.password = :password")
+    , @NamedQuery(name = "Usertable.checkCredential", query = "SELECT u FROM Usertable u WHERE u.password = :password AND u.username = :username")})
 public class Usertable implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,6 +60,11 @@ public class Usertable implements Serializable {
         this.userid = userid;
     }
 
+    public Usertable( String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
     public Usertable(Long userid, String username, String password) {
         this.userid = userid;
         this.username = username;

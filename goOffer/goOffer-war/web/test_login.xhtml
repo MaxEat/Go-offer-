@@ -10,13 +10,14 @@
             <br/>
             <h:outputText value="Username:"/>
             <br/>
-            <h:inputText value="#{logintest.username}" />
+            <h:inputText value="#{userlogin.username}" />
             <br/>
             <h:outputText value="Password:"/>
             <br/>
-            <h:inputText value="#{logintest.password}"/>
+            <h:inputText value="#{userlogin.password}"/>
             <br/>
-            <h:commandButton value="Login" action="#{logintest.loginControl()}"/>
+            <h:commandButton value="Login" action="#{userlogin.callWebServiceLogin()}"/>
+            <h:outputText value="#{userlogin.result}"/>
         </h:form>
 
     </h:body>

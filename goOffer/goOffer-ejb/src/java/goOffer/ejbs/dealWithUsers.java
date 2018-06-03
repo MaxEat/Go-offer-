@@ -34,6 +34,13 @@ public class dealWithUsers {
         em.persist(newUser);
     }
     
+    public boolean checkUser(String username, String password){
+        Usertable result = (Usertable) em.createNamedQuery("Usertable.checkCredential")
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getSingleResult();
+        return result != null;
+    }
     
     public Usertable findUserByUserID(long userID){
         return em.find(Usertable.class, userID);
