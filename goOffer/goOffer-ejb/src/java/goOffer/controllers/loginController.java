@@ -5,7 +5,7 @@
  */
 package goOffer.controllers;
 
-import goOffer.ejbs.test_login;
+import goOffer.ejbs.dealWithUsers;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +23,8 @@ import javax.naming.NamingException;
 @SessionScoped
 public class loginController implements Serializable {
 
+    dealWithUsers dealWithUsers = lookupdealWithUsersBean();
+
     private String username;
     private String password;
     private String result;
@@ -30,7 +32,7 @@ public class loginController implements Serializable {
     public String callWebServiceLogin() {
         result = login(username, password);
         if ((login(username, password)).equals("exist")) {
-            return "jsf_user_overview.xhtml";
+            return "jsf_user_overview.xhtml?faces-redirect=true";
         } else {
             return "test_login.xhtml?faces-redirect=true";
         }
@@ -84,6 +86,16 @@ public class loginController implements Serializable {
             return port.register(name, password);
         } catch (Exception ex) {
             return ex.toString();
+        }
+    }
+
+    private dealWithUsers lookupdealWithUsersBean() {
+        try {
+            Context c = new InitialContext();
+            return (dealWithUsers) c.lookup("java:global/goOffer/goOffer-ejb/dealWithUsers!goOffer.ejbs.dealWithUsers");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
         }
     }
 

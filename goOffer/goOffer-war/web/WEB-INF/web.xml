@@ -53,6 +53,6 @@
     <welcome-file-list>
         <!--<welcome-file>faces/jsf_company_overview.xhtml</welcome-file>-->
         <!--<welcome-file>faces/jsf_user_overview.xhtml</welcome-file>-->
-        <welcome-file>faces/test_login.xhtml</welcome-file>
+        <welcome-file>faces/jsf_user_login.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

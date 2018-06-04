@@ -8,12 +8,12 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:outputText value="Name: #{company_overview.companyName}"/>
+        <h:outputText value="Name: #{company_overview.getCompanyNameByUsername(userlogin.username)}"/>
         <br/>
-        <h:outputText value="Address: #{company_overview.companyAddress}"/>
+        <h:outputText value="Address: #{company_overview.getCompanyAddressByUsername(userlogin.username)}"/>
         <f:view>
             <h:form id="dataTableForm">
-                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.jobs}" var="job">
+                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.getJobsByUsername(userlogin.username)}" var="job">
                     <f:facet name="header">
                         <h:outputText value="My Offering Jobs:" />
                     </f:facet>
@@ -54,8 +54,8 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="delete" action="#{company_overview.deleteJob()}">
-                            <f:param name="deleteJobID" value="#{job.jobID}" />
+                        <h:commandButton value="delete" action="#{company_overview.deleteJob(userlogin.username)}">
+                            <f:param name="deleteJobID" value="#{job.jobID}"/>
                         </h:commandButton>
                     </h:column>   
                 </h:dataTable>
@@ -90,7 +90,7 @@
                 <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm"/>
             </h:inputText>
             <br/>
-            <h:commandButton value="Submit"  action="#{company_overview.addNewJob()}"/>
+            <h:commandButton value="Submit"  action="#{company_overview.addNewJob(userlogin.username)}"/>
         </h:form>
     </h:body>
 </html>

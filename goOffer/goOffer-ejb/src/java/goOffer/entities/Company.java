@@ -6,7 +6,6 @@
 package goOffer.entities;
 
 import java.io.Serializable;
-import static java.util.Collections.list;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -29,6 +28,7 @@ import javax.persistence.Table;
 @Table(name = "Company")
 @NamedQueries({
     @NamedQuery(name = "Company.findAll", query = "SELECT u FROM Company u")
+    , @NamedQuery(name = "Company.findByUsername", query = "SELECT u FROM Company u WHERE u.username = :username")
     , @NamedQuery(name = "Company.findByID", query = "SELECT u FROM Company u WHERE u.id = :id")})
 public class Company implements Serializable {
 
