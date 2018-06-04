@@ -52,7 +52,7 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="delete" action="#{user_overview.deleteJob()}">
+                        <h:commandButton value="delete" action="#{user_overview.deleteJob(userlogin.username)}">
                             <f:param name="deleteJobID" value="#{job.jobID}" />
                         </h:commandButton>
                     </h:column>   

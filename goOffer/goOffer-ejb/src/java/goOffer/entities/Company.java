@@ -49,6 +49,16 @@ public class Company implements Serializable {
     @JoinColumn(name = "companyID")
     private List<Job> jobs;
 
+    
+    public void removeJobFromCompany(long jobID) {
+        for (Iterator<Job> iter = jobs.listIterator(); iter.hasNext();) {
+            Job j = iter.next();
+            if (j.getJobID() == jobID) {
+                iter.remove();
+            }
+        }
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -97,14 +107,6 @@ public class Company implements Serializable {
         this.id = id;
     }
 
-    public void removeJobFromCompany(long jobID) {
-        for (Iterator<Job> iter = jobs.listIterator(); iter.hasNext();) {
-            Job j = iter.next();
-            if (j.getJobID() == jobID) {
-                iter.remove();
-            }
-        }
-    }
 
     @Override
     public int hashCode() {

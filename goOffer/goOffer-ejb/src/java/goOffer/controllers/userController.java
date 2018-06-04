@@ -9,11 +9,13 @@ import goOffer.ejbs.dealWithUsers;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -38,7 +40,12 @@ public class userController implements Serializable{
         return dealWithUsers.findUserByUsername(username).getAppliedJobs();
     }
     
-    public String deleteJob() {
+    public String deleteJob(String username) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        long deleteID = Long.parseLong(params.get("deleteJobID"));
+        dealWithUsers.removeJobFromUserByUsername(username, deleteID);
+//        dealWithJobs.deleteJobWithJobID(deleteID);
         return "jsf_user_overview.xhtml?faces-redirect=true";
     }
 

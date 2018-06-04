@@ -53,8 +53,9 @@ public class dealWithUsers {
 //        u.addJob(newJob);
     }
 
-    public void removeJobFromUserByID(long userID, long jobID) {
-
+    public void removeJobFromUserByUsername(String username, long jobID) {
+        Usertable u = findUserByUsername(username);
+        u.removeJob(jobID);
     }
 
     public void persist(Object object) {
