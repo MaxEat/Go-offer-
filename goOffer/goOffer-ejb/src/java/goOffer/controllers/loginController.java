@@ -33,9 +33,21 @@ public class loginController implements Serializable {
             return "jsf_company_overview.xhtml";
         }
         else {
-            return "test_login.xhtml";
+            return "jsf_user_login.xhtml";
         }
    
+    }
+    
+        public String callWebServiceRegister() {
+        result = register(username, password);
+        
+        if(result.equals("user exist")){
+            return "jsf_user_login.xhtml";
+        }
+        else
+        {
+            return "jsf_user_overview.xhtml";
+        }
     }
 
     public String getResult() {
@@ -47,16 +59,7 @@ public class loginController implements Serializable {
     }
 
     
-    public String callWebServiceRegister() {
-        result = register(username, password);
-        if(result.equals("user exist")){
-            return "test_login";
-        }
-        else
-        {
-            return "jsf_user_overview";
-        }
-    }
+
 
     public String getUsername() {
         return username;

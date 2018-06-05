@@ -27,14 +27,15 @@ public class LoginService {
     private dealWithUsers dealWithUsers;
 
     public java.lang.String register(java.lang.String name, java.lang.String password) {
-        if(dealWithUsers.checkUser(name, password)){
+
+        if(dealWithUsers.checkUserName(name)){
             return "user exist";
         }
         else
         {
             Usertable user = new Usertable(name, password);
             dealWithUsers.addNewUser(user);
-            return "finish";
+            return "user created";
         }
         
     }

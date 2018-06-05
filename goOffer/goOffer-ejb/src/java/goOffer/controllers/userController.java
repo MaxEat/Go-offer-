@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
@@ -30,7 +29,6 @@ import javax.naming.NamingException;
 public class userController implements Serializable{
     
     dealWithUsers dealWithUsers = lookupdealWithUsersBean();
-    private List<Job> appliedJobs;
     
     public userController() {
 
