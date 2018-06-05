@@ -17,11 +17,15 @@
             <br/>
             <h:outputText value="Password"/>
             <br/>
-            <h:inputText id = "password" value="#{userlogin.password}">
+            <h:inputSecret id = "password" value="#{userlogin.password}">
                 <f:validateLength minimum = "6" maximum = "12"/>
-            </h:inputText>
-            <h:commandButton value="Register" action="#{userlogin.callWebServiceRegister()}" />
+            </h:inputSecret>
+            <h:message for="password" style="color:red" />
+            <br/>
+            <h:commandButton value="Register" action="jsf_register_choose_role" />
+            <br/>
             <h:outputText value="#{userlogin.result}"/>
+            <br/>
             <h:outputText value="#{userlogin.username}"/>
         </h:form>
     </h:body>

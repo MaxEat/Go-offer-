@@ -160,6 +160,12 @@ public class companyController implements Serializable {
         this.addButtonShown = addButtonShown;
     }
 
+    public String initialAddressAndPeople(String address, int population, String username) {
+        dealWithCompanies.setAddressByUserName(address, username);
+        dealWithCompanies.setPopulationByUserName(population, username);
+        return "companyCreate-return";
+    }
+    
     private dealWithJobs lookupdealWithJobsBean() {
         try {
             Context c = new InitialContext();

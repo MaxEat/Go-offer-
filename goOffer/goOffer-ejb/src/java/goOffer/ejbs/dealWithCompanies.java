@@ -7,6 +7,7 @@ package goOffer.ejbs;
 
 import goOffer.entities.Company;
 import goOffer.entities.Job;
+import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -30,12 +31,20 @@ public class dealWithCompanies {
         return result;
     }
     
+    public boolean checkCompanyName(String username) {
+        List result =  em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", username)
+                .getResultList();
+        return !result.isEmpty();
+    }
+            
     public boolean checkCompany(String username, String password){
-        Company result = (Company) em.createNamedQuery("Company.checkCredential")
+        List result =  em.createNamedQuery("Company.checkCredential")
                 .setParameter("username", username)
                 .setParameter("password", password)
-                .getSingleResult();
-        return result != null;
+                .getResultList();
+        Company company = (Company)result.get(0);
+        return company != null;
     }
         
     public void addJobToCompanyByUsername(String username, Job job){
@@ -49,16 +58,27 @@ public class dealWithCompanies {
     }
     
     public void setAddressByUserName(String address, String name) {
-        Company company = (Company)em.find(Company.class ,1);
-        company.setAddress(address);
+        List companyList =  em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", name)
+                .getResultList();
+        Company company = (Company)companyList.get(0);
+        if(company!=null)
+            company.setAddress(address);
     }
     
     public void setPopulationByUserName(int number, String name) {
-        
-        Company company = (Company)em.find(Company.class ,1);
-        company.setPopulation(number);
+        List companyList = em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", name)
+                .getResultList();
+        Company company = (Company)companyList.get(0);
+        if(company!=null)
+            company.setPopulation(number);
     }
 
+    public void addNewCompany(Company company) {
+        em.persist(company);
+    }
+    
     public void persist(Object object) {
         em.persist(object);
     }

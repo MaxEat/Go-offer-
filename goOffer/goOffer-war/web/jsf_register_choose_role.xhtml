@@ -9,8 +9,8 @@
         <h:form>
             <h:outputText value="Choose your role please" />
             <br/>
-            <h:commandButton value="Company" action="companyCreate" />
-            <h:commandButton value="User" action="jsf_user_register" />
+            <h:commandButton value="Company" action="#{userlogin.callWebServiceRegisterCompany()}" />
+            <h:commandButton value="User" action="#{userlogin.callWebServiceRegister()}" />
         </h:form>
     </h:body>
 </html>

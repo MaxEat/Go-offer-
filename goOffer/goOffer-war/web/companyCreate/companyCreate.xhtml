@@ -8,14 +8,14 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:outputText value="Population"/>
-            <br/>
-            <h:inputText id = "population" value="#{companyFlow.population}">
+            
+            <h:outputText value="Company name:" />
+            <br />
+            <h:inputText id = "companyName" value="#{companyFlow.companyName}">
                 <f:validateLength minimum = "6" maximum = "12"/>
             </h:inputText>
-            <h:message for="population" style="color:red" />
             <br/>
-            <h:commandButton value="Login" action="companyCreate-address" />
+            <h:commandButton value="Next" action="companyCreate-companyName" />
         </h:form>
     </h:body>
 </html>

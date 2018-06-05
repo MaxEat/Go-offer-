@@ -18,9 +18,9 @@
             <br/>
             <h:outputText value="Password:"/>
             <br/>
-            <h:inputText value="#{userlogin.password}" >
+            <h:inputSecret value="#{userlogin.password}" >
                 <f:validateLength minimum = "6" maximum = "10"/>
-            </h:inputText>
+            </h:inputSecret>
             <br/>
             <h:commandButton value="Login" action="#{userlogin.callWebServiceLogin()}" />
             <h:outputText value="#{userlogin.result}"/>
