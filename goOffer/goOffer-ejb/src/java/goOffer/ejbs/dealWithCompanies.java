@@ -28,6 +28,14 @@ public class dealWithCompanies {
           return em.find(Company.class, companyID);
     }
     
+    public boolean checkCompany(String username, String password){
+        Company result = (Company) em.createNamedQuery("Company.checkCredential")
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getSingleResult();
+        return result != null;
+    }
+        
     public void addJobToCompanyByID(long companyID, Job job){
         Company c = getCompanyByCompanyID(companyID);
         c.getJobs().add(job);
@@ -38,7 +46,16 @@ public class dealWithCompanies {
         c.removeJobFromCompany(jobID);
     }
     
+    public void setAddressByUserName(String address, String name) {
+        Company company = (Company)em.find(Company.class ,1);
+        company.setAddress(address);
+    }
     
+    public void setPopulationByUserName(int number, String name) {
+        
+        Company company = (Company)em.find(Company.class ,1);
+        company.setPopulation(number);
+    }
 
     public void persist(Object object) {
         em.persist(object);

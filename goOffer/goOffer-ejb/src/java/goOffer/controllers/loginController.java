@@ -4,16 +4,9 @@
  * and open the template in the editor.
  */
 package goOffer.controllers;
-
-import goOffer.ejbs.test_login;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  *
@@ -21,6 +14,7 @@ import javax.naming.NamingException;
  */
 @ManagedBean(name = "userlogin")
 @SessionScoped
+
 public class loginController implements Serializable {
 
     private String username;
@@ -29,11 +23,16 @@ public class loginController implements Serializable {
 
     public String callWebServiceLogin() {
         result = login(username, password);
-        if ((login(username, password)).equals("exist")) {
+        if(result.equals("user exist")){
             return "jsf_user_overview.xhtml";
-        } else {
-            return "test_login.xhtml?faces-redirect=true";
         }
+        else if(result.equals("company exist")){
+            return "jsf_company_overview.xhtml";
+        }
+        else {
+            return "test_login.xhtml";
+        }
+   
     }
 
     public String getResult() {
@@ -45,8 +44,15 @@ public class loginController implements Serializable {
     }
 
     
-    public void callWebServiceRegister() {
+    public String callWebServiceRegister() {
         result = register(username, password);
+        if(result.equals("user exist")){
+            return "test_login";
+        }
+        else
+        {
+            return "jsf_user_overview";
+        }
     }
 
     public String getUsername() {

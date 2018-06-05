@@ -77,7 +77,9 @@
     </wsdl:binding>
     <wsdl:service name="LoginService">
         <wsdl:port name="LoginServiceHttpPort" binding="tns:LoginServiceHttpBinding">
-            <wsdlsoap:address location="http://localhost:53547/LoginService/LoginService"/>
+            <!--<wsdlsoap:address location="http://localhost:53547/LoginService/LoginService"/>-->
+            <wsdlsoap:address location="http://localhost:8080/LoginService/LoginService"/>
+
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
