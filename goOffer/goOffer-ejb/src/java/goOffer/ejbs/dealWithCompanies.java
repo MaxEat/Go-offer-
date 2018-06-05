@@ -75,6 +75,15 @@ public class dealWithCompanies {
             company.setPopulation(number);
     }
 
+    public void setCompanyNameByUserName(String companyName, String username) {
+         List companyList = em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", username)
+                .getResultList();
+        Company company = (Company)companyList.get(0);
+        if(company!=null)
+            company.setCompanyName(companyName);       
+    }
+    
     public void addNewCompany(Company company) {
         em.persist(company);
     }

@@ -8,7 +8,7 @@
   <flow-definition id="companyCreate">
 
     <flow-return id="returnFromCompanyFlow">
-      <from-outcome>/faces/jsf_register.xhtml</from-outcome>
+      <from-outcome>/jsf_company_overview.xhtml</from-outcome>
     </flow-return>
 
   </flow-definition>
