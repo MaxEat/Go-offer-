@@ -6,7 +6,6 @@
 package goOffer.entities;
 
 import java.io.Serializable;
-import static java.util.Collections.list;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -29,8 +28,10 @@ import javax.persistence.Table;
 @Table(name = "Company")
 @NamedQueries({
     @NamedQuery(name = "Company.findAll", query = "SELECT u FROM Company u")
-    , @NamedQuery(name = "Company.findByID", query = "SELECT u FROM Company u WHERE u.id = :id") 
-    , @NamedQuery(name = "Company.checkCredential", query = "SELECT u FROM Company u WHERE u.username = :username AND u.password = :password")})
+    , @NamedQuery(name = "Company.checkCredential", query = "SELECT u FROM Company u WHERE u.username = :username AND u.password = :password")
+    , @NamedQuery(name = "Company.findByUsername", query = "SELECT u FROM Company u WHERE u.username = :username")
+    , @NamedQuery(name = "Company.findByID", query = "SELECT u FROM Company u WHERE u.id = :id")})
+
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +67,15 @@ public class Company implements Serializable {
     public Company(String name, String pass) {
         username = name;
         password = pass;
+    }
+    
+    public void removeJobFromCompany(long jobID) {
+        for (Iterator<Job> iter = jobs.listIterator(); iter.hasNext();) {
+            Job j = iter.next();
+            if (j.getJobID() == jobID) {
+                iter.remove();
+            }
+        }
     }
     
     public String getUsername() {
@@ -116,14 +126,6 @@ public class Company implements Serializable {
         this.id = id;
     }
 
-    public void removeJobFromCompany(long jobID) {
-        for (Iterator<Job> iter = jobs.listIterator(); iter.hasNext();) {
-            Job j = iter.next();
-            if (j.getJobID() == jobID) {
-                iter.remove();
-            }
-        }
-    }
 
     @Override
     public int hashCode() {

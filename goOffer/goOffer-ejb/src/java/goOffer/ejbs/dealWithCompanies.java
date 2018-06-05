@@ -7,7 +7,7 @@ package goOffer.ejbs;
 
 import goOffer.entities.Company;
 import goOffer.entities.Job;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,16 +16,18 @@ import javax.persistence.PersistenceContext;
  *
  * @author jiahao pan
  */
-@Stateless
+@Stateful
 @LocalBean
 public class dealWithCompanies {
 
     @PersistenceContext(unitName = "goOffer-ejbPU")
     private EntityManager em;
     
-    public Company getCompanyByCompanyID(long companyID) {
-        
-          return em.find(Company.class, companyID);
+    public Company getCompanyByUsername(String username) {
+        Company result = (Company) em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", username)
+                .getSingleResult();
+        return result;
     }
     
     public boolean checkCompany(String username, String password){
@@ -36,13 +38,13 @@ public class dealWithCompanies {
         return result != null;
     }
         
-    public void addJobToCompanyByID(long companyID, Job job){
-        Company c = getCompanyByCompanyID(companyID);
+    public void addJobToCompanyByUsername(String username, Job job){
+        Company c = getCompanyByUsername(username);
         c.getJobs().add(job);
     }
     
-    public void removeJobFromCompanyByID(long companyID, long jobID) {
-        Company c = getCompanyByCompanyID(companyID);
+    public void removeJobFromCompanyByUsername(String username, long jobID) {
+        Company c = getCompanyByUsername(username);
         c.removeJobFromCompany(jobID);
     }
     

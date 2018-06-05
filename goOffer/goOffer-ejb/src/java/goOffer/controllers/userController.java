@@ -9,10 +9,13 @@ import goOffer.ejbs.dealWithUsers;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -25,33 +28,28 @@ import javax.naming.NamingException;
 @ManagedBean(name = "user_overview")
 @SessionScoped
 public class userController implements Serializable{
-
-    dealWithUsers dealWithUsers = lookupdealWithUsersBean();
     
+    dealWithUsers dealWithUsers = lookupdealWithUsersBean();
     private List<Job> appliedJobs;
-    private final String currentUserName;
     
     public userController() {
-        appliedJobs = dealWithUsers.findUserByUserID(1).getAppliedJobs();
-        currentUserName = dealWithUsers.findUserByUserID(1).getUsername();
+
     }
     
-    public String deleteJob() {
+    public List<Job> getAppliedJobsWithUsername(String username) {
+        return dealWithUsers.findUserByUsername(username).getAppliedJobs();
+    }
+    
+    public String deleteJob(String username) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        long deleteID = Long.parseLong(params.get("deleteJobID"));
+        dealWithUsers.removeJobFromUserByUsername(username, deleteID);
+//        dealWithJobs.deleteJobWithJobID(deleteID);
         return "jsf_user_overview.xhtml?faces-redirect=true";
     }
 
-    public List<Job> getAppliedJobs() {
-        return appliedJobs;
-    }
 
-    public void setAppliedJobs(List<Job> appliedJobs) {
-        this.appliedJobs = appliedJobs;
-    }
-
-    public String getCurrentUserName() {
-        return currentUserName;
-    }
-    
 
     private dealWithUsers lookupdealWithUsersBean() {
         try {

@@ -37,10 +37,7 @@ public class companyController implements Serializable {
     private Boolean addButtonShown = true;
     private Boolean addFormShown = false;
 
-    private List<Job> jobs;
     private jobType[] types;
-    private String companyName;
-    private String companyAddress;
 
     private String jobName;
     private String jobLocation;
@@ -49,30 +46,56 @@ public class companyController implements Serializable {
     private jobType chosenType;
     
     public companyController(){
-        jobs = dealWithCompanies.getCompanyByCompanyID(1).getJobs();
         types = jobType.values();
-        companyName = dealWithCompanies.getCompanyByCompanyID(1).getCompanyName();
-        companyAddress = dealWithCompanies.getCompanyByCompanyID(1).getAddress();
         
     }
-
     
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getCompanyAddress() {
-        return companyAddress;
-    }
-
-    public void setCompanyAddress(String companyAddress) {
-        this.companyAddress = companyAddress;
+    public List<Job> getJobsByUsername(String username) {
+        return dealWithCompanies.getCompanyByUsername(username).getJobs();
     }
     
+    public String getCompanyNameByUsername(String username) {
+        return dealWithCompanies.getCompanyByUsername(username).getCompanyName();
+    }
+    
+    public String getCompanyAddressByUsername(String username) {
+        return dealWithCompanies.getCompanyByUsername(username).getAddress();
+    }
+            
+            
+    public String addButtonListener() {
+        addButtonShown = false;
+        addFormShown = true;
+        return "jsf_company_overview.xhtml?faces-redirect=true";
+    }
+
+    public String addNewJob(String username) {
+        addButtonShown = true;
+        addFormShown = false;
+
+        Job newjob = new Job();
+        newjob.setDescription(jobDescription);
+        newjob.setLocation(jobLocation);
+        newjob.setJobName(jobName);
+        newjob.setExpirationDate(jobExpirationDate);
+        newjob.setType(chosenType);
+        
+        dealWithCompanies.addJobToCompanyByUsername(username, newjob);
+
+        return "jsf_company_overview.xhtml?faces-redirect=true";
+    }
+
+    public String deleteJob(String username) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        long deleteID = Long.parseLong(params.get("deleteJobID"));
+        dealWithCompanies.removeJobFromCompanyByUsername(username, deleteID);
+        dealWithJobs.deleteJobWithJobID(deleteID);
+
+        return "jsf_company_overview.xhtml?faces-redirect=true";
+    }
+
+   
     public jobType getChosenType() {
         return chosenType;
     }
@@ -135,50 +158,6 @@ public class companyController implements Serializable {
 
     public void setAddButtonShown(Boolean addButtonShown) {
         this.addButtonShown = addButtonShown;
-    }
-
-    public List<Job> getJobs() {
-        return jobs;
-    }
-
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
-
-    public String addButtonListener() {
-        addButtonShown = false;
-        addFormShown = true;
-        return "jsf_company_overview.xhtml?faces-redirect=true";
-    }
-
-    public String addNewJob() {
-        addButtonShown = true;
-        addFormShown = false;
-
-        Job newjob = new Job();
-        newjob.setDescription(jobDescription);
-        newjob.setLocation(jobLocation);
-        newjob.setJobName(jobName);
-        newjob.setExpirationDate(jobExpirationDate);
-        newjob.setType(chosenType);
-        
-        dealWithCompanies.addJobToCompanyByID(1, newjob);
-        
-        jobs = dealWithCompanies.getCompanyByCompanyID(1).getJobs();
-
-        return "jsf_company_overview.xhtml?faces-redirect=true";
-    }
-
-    public String deleteJob() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        long deleteID = Long.parseLong(params.get("deleteJobID"));
-        dealWithCompanies.removeJobFromCompanyByID(1, deleteID);
-        dealWithJobs.deleteJobWithJobID(deleteID);
-        
-        jobs = dealWithCompanies.getCompanyByCompanyID(1).getJobs();
-
-        return "jsf_company_overview.xhtml?faces-redirect=true";
     }
 
     private dealWithJobs lookupdealWithJobsBean() {

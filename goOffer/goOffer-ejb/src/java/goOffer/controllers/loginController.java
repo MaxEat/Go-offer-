@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package goOffer.controllers;
+
+import goOffer.ejbs.dealWithUsers;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,6 +18,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 
 public class loginController implements Serializable {
+
 
     private String username;
     private String password;
@@ -92,5 +95,7 @@ public class loginController implements Serializable {
             return ex.toString();
         }
     }
+
+
 
 }
