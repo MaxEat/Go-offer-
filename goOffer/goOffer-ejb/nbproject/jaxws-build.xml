@@ -44,8 +44,8 @@
     </target>
     <target name="wsimport-client-LoginRegisterService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
-        <property name="wsdl-LoginRegisterService" location="${meta.inf}/xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" destdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" wsdl="${wsdl-LoginRegisterService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl" xnocompile="true" xendorsed="true">
+        <property name="wsdl-LoginRegisterService" location="${meta.inf}/xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_53547/LoginRegisterService/LoginRegisterService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" destdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" wsdl="${wsdl-LoginRegisterService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:53547/LoginRegisterService/LoginRegisterService?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${wsdl-LoginRegisterService}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
         </wsimport>

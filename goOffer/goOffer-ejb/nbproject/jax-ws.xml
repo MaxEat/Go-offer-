@@ -35,7 +35,7 @@
     </service>
     <service name="LoginRegisterService">
       <implementation-class>goOffer.service.LoginRegisterService</implementation-class>
-      <wsdl-url>file:/Users/max/Desktop/loginRegister.wsdl</wsdl-url>
+      <wsdl-url>file:/C:/Users/46411/Desktop/loginRegister.wsdl</wsdl-url>
       <local-wsdl-file>loginRegister.wsdl</local-wsdl-file>
       <service-name>LoginRegisterService</service-name>
       <port-name>LoginRegisterServiceHttpPort</port-name>
@@ -100,8 +100,8 @@
       </wsimport-options>
     </client>
     <client name="LoginRegisterService">
-      <wsdl-url>http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/LoginRegisterService/LoginRegisterService.wsdl</local-wsdl-file>
+      <wsdl-url>http://localhost:53547/LoginRegisterService/LoginRegisterService?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_53547/LoginRegisterService/LoginRegisterService.wsdl</local-wsdl-file>
       <package-name>xfiredemo.liuxiang.com.helloservice</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -119,7 +119,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:53547/LoginRegisterService/LoginRegisterService?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

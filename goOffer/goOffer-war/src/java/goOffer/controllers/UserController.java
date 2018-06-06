@@ -28,15 +28,15 @@ import javax.naming.NamingException;
 
 @ManagedBean(name = "user_overview")
 @SessionScoped
-public class userController implements Serializable{
+public class UserController implements Serializable{
 
     dealWithJobs dealWithJobs = lookupdealWithJobsBean();
 
     reminderSessionBean reminderSessionBean = lookupreminderSessionBeanBean();
-    
+
     dealWithUsers dealWithUsers = lookupdealWithUsersBean();
     
-    public userController() {
+    public UserController() {
 
     }
     

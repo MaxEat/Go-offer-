@@ -7,12 +7,13 @@
         <title>Personal overview</title>
     </h:head>
     <h:body>
-        <h:outputText value="Hello, #{userlogin.username} !"/>
-        <br/>
+        
+        <h:outputText value="Hello, #{login_and_register.username} !"/>
         <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />
+
         <f:view>
             <h:form id="dataTableForm">
-                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_overview.getAppliedJobsWithUsername(userlogin.username)}" var="job">
+                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_overview.getAppliedJobsWithUsername(login_and_register.username)}" var="job">
                     <f:facet name="header">
                         <h:outputText value="My Applying Jobs:" />
                     </f:facet>
@@ -53,7 +54,7 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="delete" action="#{user_overview.deleteJob(userlogin.username)}">
+                        <h:commandButton value="delete" action="#{user_overview.deleteJob(login_and_register.username)}">
                             <f:param name="deleteJobID" value="#{job.jobID}" />
                         </h:commandButton>
                     </h:column>   
