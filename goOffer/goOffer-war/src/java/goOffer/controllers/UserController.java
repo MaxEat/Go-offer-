@@ -26,11 +26,11 @@ import javax.naming.NamingException;
 
 @ManagedBean(name = "user_overview")
 @SessionScoped
-public class userController implements Serializable{
+public class UserController implements Serializable{
     
     dealWithUsers dealWithUsers = lookupdealWithUsersBean();
     
-    public userController() {
+    public UserController() {
 
     }
     

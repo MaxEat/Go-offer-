@@ -14,10 +14,10 @@ import javax.faces.bean.SessionScoped;
  *
  * @author jiahao pan
  */
-@ManagedBean(name = "userlogin")
+@ManagedBean(name = "login_and_register")
 @SessionScoped
 
-public class loginController implements Serializable {
+public class LoginRegisterController implements Serializable {
 
 
     private String username;
@@ -27,13 +27,13 @@ public class loginController implements Serializable {
     public String callWebServiceLogin() {
         result = login(username, password);
         if(result.equals("user exist")){
-            return "jsf_user_overview.xhtml";
+            return "jsf_user_overview.xhtml?faces-redirect=true";
         }
         else if(result.equals("company exist")){
-            return "jsf_company_overview.xhtml";
+            return "jsf_company_overview.xhtml?faces-redirect=true";
         }
         else {
-            return "jsf_user_login.xhtml";
+            return "jsf_user_login.xhtml?faces-redirect=true";
         }
    
     }
@@ -45,11 +45,11 @@ public class loginController implements Serializable {
         result = register(username, password);
         
         if(result.equals("user exist")){
-            return "jsf_user_register.xhtml";
+            return "jsf_user_register.xhtml?faces-redirect=true";
         }
         else
         {
-            return "jsf_user_overview.xhtml";
+            return "jsf_user_overview.xhtml?faces-redirect=true";
         }
     }
 
@@ -57,7 +57,7 @@ public class loginController implements Serializable {
         result = registerCompany(username, password);
         
         if(result.equals("company exist")){
-            return "jsf_user_register.xhtml";
+            return "jsf_user_register.xhtml?faces-redirect=true";
         }
         else
         {
