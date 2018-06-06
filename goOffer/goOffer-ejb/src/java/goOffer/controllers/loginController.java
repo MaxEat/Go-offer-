@@ -32,7 +32,7 @@ public class loginController implements Serializable {
     public String callWebServiceLogin() {
         result = login(username, password);
         if ((login(username, password)).equals("exist")) {
-            return "jsf_user_overview.xhtml?faces-redirect=true";
+            return "jsf_company_overview.xhtml?faces-redirect=true";
         } else {
             return "test_login.xhtml?faces-redirect=true";
         }
