@@ -12,7 +12,8 @@
             <h:outputText value="Address: #{companyFlow.address}" />
             <br />
             <h:commandButton value="Return" action="companyCreate-address" />
-            <h:commandButton value="Submit" action="returnFromCompanyFlow" />
+            <!--(String companyName, String address, int population, String username)-->
+            <h:commandButton value="Submit" action="#{company_overview.initialAddressAndPeople(companyFlow.companyName,  companyFlow.address, companyFlow.population, userlogin.username)}" />
         </h:form>
     </h:body>
 </html>
