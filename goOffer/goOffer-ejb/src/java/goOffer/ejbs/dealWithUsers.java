@@ -28,7 +28,7 @@ public class dealWithUsers {
         List userList = em.createNamedQuery("Usertable.findAll").getResultList();
         return userList;
     }
-
+    
     public void addNewUser(Usertable newUser) {
         em.persist(newUser);
     }
@@ -48,15 +48,16 @@ public class dealWithUsers {
         return !result.isEmpty();
     }
     public Usertable findUserByUsername(String username) {
-        Usertable result = (Usertable) em.createNamedQuery("Usertable.findByUsername")
+        List result =  em.createNamedQuery("Usertable.findByUsername")
                 .setParameter("username", username)
-                .getSingleResult();
-        return result;
+                .getResultList();
+        return (Usertable)result.get(0);
     }
 
-    public void addNewJobToUserByUserID(long userID, Job newJob) {
-//        Usertable u = findUserByUserID(userID);
-//        u.addJob(newJob);
+    public void addNewJobToUserByUsername(String username, Job newJob) {
+        Usertable u = findUserByUsername(username);
+        System.out.print(u.toString());
+        u.addJob(newJob);
     }
 
     public void removeJobFromUserByUsername(String username, long jobID) {
@@ -67,5 +68,6 @@ public class dealWithUsers {
     public void persist(Object object) {
         em.persist(object);
     }
+    
 
 }

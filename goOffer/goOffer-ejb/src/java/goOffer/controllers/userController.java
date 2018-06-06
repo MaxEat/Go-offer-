@@ -5,7 +5,9 @@
  */
 package goOffer.controllers;
 
+import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
+import goOffer.ejbs.reminderSessionBean;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +29,10 @@ import javax.naming.NamingException;
 @ManagedBean(name = "user_overview")
 @SessionScoped
 public class userController implements Serializable{
+
+    dealWithJobs dealWithJobs = lookupdealWithJobsBean();
+
+    reminderSessionBean reminderSessionBean = lookupreminderSessionBeanBean();
     
     dealWithUsers dealWithUsers = lookupdealWithUsersBean();
     
@@ -47,8 +53,14 @@ public class userController implements Serializable{
         return "jsf_user_overview.xhtml?faces-redirect=true";
     }
 
+    public List<Job> getExpiredList() {
+        return dealWithJobs.getExpiredJobs();
+    }
 
-
+    public void applyJob(String username, Job newJob) {
+        dealWithUsers.addNewJobToUserByUsername(username, newJob);
+    }
+    
     private dealWithUsers lookupdealWithUsersBean() {
         try {
             Context c = new InitialContext();
@@ -58,7 +70,28 @@ public class userController implements Serializable{
             throw new RuntimeException(ne);
         }
     }
+
+    private reminderSessionBean lookupreminderSessionBeanBean() {
+        try {
+            Context c = new InitialContext();
+            return (reminderSessionBean) c.lookup("java:global/goOffer/goOffer-ejb/reminderSessionBean!goOffer.ejbs.reminderSessionBean");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private dealWithJobs lookupdealWithJobsBean() {
+        try {
+            Context c = new InitialContext();
+            return (dealWithJobs) c.lookup("java:global/goOffer/goOffer-ejb/dealWithJobs!goOffer.ejbs.dealWithJobs");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
     
     
+
     
 }

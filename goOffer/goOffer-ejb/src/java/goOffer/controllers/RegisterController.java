@@ -5,6 +5,7 @@
  */
 package goOffer.controllers;
 
+import goOffer.ejbs.reminderSessionBean;
 import goOffer.ejbs.dealWithCompanies;
 import goOffer.entities.Company;
 import java.io.Serializable;
@@ -30,8 +31,8 @@ public class RegisterController implements Serializable{
     private String password;
  
 
-
     
+
     public String addCompany() {
         Company company = new Company(username, password);
         dealWithCompanies.persist(company);

@@ -72,9 +72,6 @@ public class loginController implements Serializable {
         this.result = result;
     }
 
-    
-
-
     public String getUsername() {
         return username;
     }

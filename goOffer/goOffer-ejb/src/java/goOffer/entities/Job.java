@@ -30,7 +30,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Job.findAll", query = "SELECT u FROM Job u")
     , @NamedQuery(name = "Job.deleteByID", query = "DELETE FROM Job u WHERE u.jobID = :jobID")
 //    , @NamedQuery(name = "Job.findByCompany", query = "SELECT u FROM Job u WHERE u.companyID = :companyID")
-    , @NamedQuery(name = "Job.findByJobType", query = "SELECT u FROM Job u WHERE u.type = :type")})
+    , @NamedQuery(name = "Job.findByJobType", query = "SELECT u FROM Job u WHERE u.type = :type")
+    , @NamedQuery(name = "Job.findJobsBefore", query = "SELECT u FROM Job u WHERE u.expirationDate < :expirationDate")})
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
