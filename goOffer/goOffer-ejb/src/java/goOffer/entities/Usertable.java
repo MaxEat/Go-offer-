@@ -104,6 +104,7 @@ public class Usertable implements Serializable {
     }
     
     public void addJob(Job newJob){
+        //检查在不在appliedJobs里面
         appliedJobs.add(newJob);
         if (!newJob.getAppliedUsers().contains(this)) {
             newJob.getAppliedUsers().add(this);
