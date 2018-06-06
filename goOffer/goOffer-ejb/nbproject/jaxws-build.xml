@@ -42,6 +42,23 @@
         <delete dir="${build.generated.dir}/jax-wsCache/LoginService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/xfiredemo/liuxiang/com/helloservice"/>
     </target>
+    <target name="wsimport-client-LoginRegisterService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
+        <property name="wsdl-LoginRegisterService" location="${meta.inf}/xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" destdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" wsdl="${wsdl-LoginRegisterService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-LoginRegisterService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/LoginRegisterService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-LoginRegisterService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/xfiredemo/liuxiang/com/helloservice"/>
+    </target>
     <target name="wsimport-service-LoginService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/service/LoginService"/>
         <property name="service-wsdl-LoginService" location="${meta.inf}/xml-resources/web-services/LoginService/wsdl/loginRegister.wsdl"/>
@@ -64,6 +81,28 @@
         <delete dir="${build.generated.dir}/jax-wsCache/service/LoginService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/xfiredemo/liuxiang/com/helloservice"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-LoginService"/>
-    <target name="wsimport-service-generate" depends="wsimport-service-LoginService"/>
+    <target name="wsimport-service-LoginRegisterService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/service/LoginRegisterService"/>
+        <property name="service-wsdl-LoginRegisterService" location="${meta.inf}/xml-resources/web-services/LoginRegisterService/wsdl/loginRegister.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/service/LoginRegisterService" destdir="${build.generated.dir}/jax-wsCache/service/LoginRegisterService" wsdl="${service-wsdl-LoginRegisterService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-LoginRegisterService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/service/LoginRegisterService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/service/LoginRegisterService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+        <property name="targetLocation-LoginRegisterService" location="${meta.inf}/wsdl/LoginRegisterService"/>
+        <property name="sourceLocation-LoginRegisterService" location="${meta.inf}/xml-resources/web-services/LoginRegisterService/wsdl/"/>
+        <copy todir="${targetLocation-LoginRegisterService}">
+            <fileset dir="${sourceLocation-LoginRegisterService}"/>
+        </copy>
+    </target>
+    <target name="wsimport-service-clean-LoginRegisterService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/service/LoginRegisterService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/xfiredemo/liuxiang/com/helloservice"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-LoginService, wsimport-client-LoginRegisterService"/>
+    <target name="wsimport-service-generate" depends="wsimport-service-LoginService, wsimport-service-LoginRegisterService"/>
 </project>

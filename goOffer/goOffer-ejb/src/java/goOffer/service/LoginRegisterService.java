@@ -15,11 +15,11 @@ import javax.jws.WebService;
 
 /**
  *
- * @author jiahao pan
+ * @author max
  */
-@WebService(serviceName = "LoginService", portName = "LoginServiceHttpPort", endpointInterface = "xfiredemo.liuxiang.com.helloservice.LoginServicePortType", targetNamespace = "http://com.liuxiang.xfireDemo/HelloService", wsdlLocation = "META-INF/wsdl/LoginService/loginRegister.wsdl")
+@WebService(serviceName = "LoginRegisterService", portName = "LoginRegisterServiceHttpPort", endpointInterface = "xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType", targetNamespace = "http://com.liuxiang.xfireDemo/HelloService", wsdlLocation = "META-INF/wsdl/LoginRegisterService/loginRegister.wsdl")
 @Stateless
-public class LoginService {
+public class LoginRegisterService {
 
     @EJB
     private dealWithCompanies dealWithCompanies;
@@ -53,16 +53,16 @@ public class LoginService {
     /**
      * Web 服务操作
      */
-    public String registerCompany(String username, String password) {
+    public java.lang.String registerCompany(java.lang.String username, java.lang.String password) {
         
-        if(dealWithCompanies.checkCompanyName(username)){
+        if( dealWithCompanies.checkCompanyName(username)){
             return "company exist";
         }
         else{
             Company company = new Company(username, password);
             dealWithCompanies.addNewCompany(company);
-            return "user created";
+            return "company created";
         }
     }
-   
+    
 }

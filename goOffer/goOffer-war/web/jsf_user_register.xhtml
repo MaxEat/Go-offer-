@@ -7,27 +7,25 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:button value="Register Now" outcome="jsf_user_register" />
         <h:form>
-            <br/>
-            <h:outputText value="Username:"/>
+            <h:outputText value="Username"/>
             <br/>
             <h:inputText id = "username" value="#{userlogin.username}">
                 <f:validator validatorId="goOffer.validators.UsernameValidator" />
             </h:inputText>
             <h:message for="username" style="color:red" />
             <br/>
-            <h:outputText value="Password:"/>
+            <h:outputText value="Password"/>
             <br/>
-            <h:inputSecret value="#{userlogin.password}" >
-                <f:validateLength minimum = "6" maximum = "10"/>
+            <h:inputSecret id = "password" value="#{userlogin.password}">
+                <f:validateLength minimum = "6" maximum = "12"/>
             </h:inputSecret>
+            <h:message for="password" style="color:red" />
             <br/>
-            
-            <h:commandButton value="Login" action="#{userlogin.callWebServiceLogin()}" />
-            <h:outputText value="#{userlogin.result}"/>
+            <h:commandButton value="Register" action="jsf_register_choose_role" />
+            <br/>
+            <h:outputText value="#{userlogin.username}"/>
         </h:form>
-
     </h:body>
 </html>
 

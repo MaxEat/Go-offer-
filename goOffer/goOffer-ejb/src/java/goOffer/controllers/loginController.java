@@ -7,13 +7,8 @@ package goOffer.controllers;
 
 import goOffer.ejbs.dealWithUsers;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  *
@@ -21,9 +16,9 @@ import javax.naming.NamingException;
  */
 @ManagedBean(name = "userlogin")
 @SessionScoped
+
 public class loginController implements Serializable {
 
-    dealWithUsers dealWithUsers = lookupdealWithUsersBean();
 
     private String username;
     private String password;
@@ -31,13 +26,44 @@ public class loginController implements Serializable {
 
     public String callWebServiceLogin() {
         result = login(username, password);
-        if ((login(username, password)).equals("exist")) {
-            return "jsf_company_overview.xhtml?faces-redirect=true";
-        } else {
-            return "test_login.xhtml?faces-redirect=true";
+        if(result.equals("user exist")){
+            return "jsf_user_overview.xhtml";
+        }
+        else if(result.equals("company exist")){
+            return "jsf_company_overview.xhtml";
+        }
+        else {
+            return "jsf_user_login.xhtml";
+        }
+   
+    }
+    
+    
+    
+    public String callWebServiceRegister() {
+      
+        result = register(username, password);
+        
+        if(result.equals("user exist")){
+            return "jsf_user_register.xhtml";
+        }
+        else
+        {
+            return "jsf_user_overview.xhtml";
         }
     }
 
+    public String callWebServiceRegisterCompany() {
+        result = registerCompany(username, password);
+        
+        if(result.equals("company exist")){
+            return "jsf_user_register.xhtml";
+        }
+        else
+        {
+            return "companyCreate";
+        }
+    }
     public String getResult() {
         return result;
     }
@@ -47,9 +73,7 @@ public class loginController implements Serializable {
     }
 
     
-    public void callWebServiceRegister() {
-        result = register(username, password);
-    }
+
 
     public String getUsername() {
         return username;
@@ -67,36 +91,64 @@ public class loginController implements Serializable {
         this.password = password;
     }
 
-    private static String login(java.lang.String name, java.lang.String password) {
-        try {
-            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
-            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
-            return port.login(name, password);
-        } catch (Exception ex) {
+//    private static String login(java.lang.String name, java.lang.String password) {
+//        try {
+//            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
+//            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
+//            return port.login(name, password);
+//        } catch (Exception ex) {
+//            return ex.toString();
+//        }
+//
+//    }
+//
+//    private static String register(java.lang.String name, java.lang.String password) {
+//        try {
+//
+//            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
+//            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
+//            return port.register(name, password);
+//        } catch (Exception ex) {
+//            return ex.toString();
+//        }
+//    }
+
+    
+    
+    
+    private static String registerCompany(java.lang.String name, java.lang.String password) {
+        try{
+            xfiredemo.liuxiang.com.helloservice.LoginRegisterService service = new xfiredemo.liuxiang.com.helloservice.LoginRegisterService();
+            xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType port = service.getLoginRegisterServiceHttpPort();
+            return port.registerCompany(name, password);
+        }catch (Exception ex) {
             return ex.toString();
         }
+        
+        
+    }
 
+    private static String login(java.lang.String name, java.lang.String password) {
+        try{
+            xfiredemo.liuxiang.com.helloservice.LoginRegisterService service = new xfiredemo.liuxiang.com.helloservice.LoginRegisterService();
+            xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType port = service.getLoginRegisterServiceHttpPort();
+            return port.login(name, password);
+        }catch (Exception ex) {
+            return ex.toString();
+        }
+        
     }
 
     private static String register(java.lang.String name, java.lang.String password) {
-        try {
-
-            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
-            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
-            return port.register(name, password);
-        } catch (Exception ex) {
+        try{
+            xfiredemo.liuxiang.com.helloservice.LoginRegisterService service = new xfiredemo.liuxiang.com.helloservice.LoginRegisterService();
+            xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType port = service.getLoginRegisterServiceHttpPort();
+            return port.register(name, password);    
+        }catch (Exception ex) {
             return ex.toString();
         }
     }
 
-    private dealWithUsers lookupdealWithUsersBean() {
-        try {
-            Context c = new InitialContext();
-            return (dealWithUsers) c.lookup("java:global/goOffer/goOffer-ejb/dealWithUsers!goOffer.ejbs.dealWithUsers");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
+ 
 
 }

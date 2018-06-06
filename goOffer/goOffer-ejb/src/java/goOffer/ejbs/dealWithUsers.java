@@ -34,13 +34,19 @@ public class dealWithUsers {
     }
 
     public boolean checkUser(String username, String password) {
-        Usertable result = (Usertable) em.createNamedQuery("Usertable.checkCredential")
+        List result =  em.createNamedQuery("Usertable.checkCredential")
                 .setParameter("username", username)
                 .setParameter("password", password)
-                .getSingleResult();
-        return result != null;
+                .getResultList();
+        return !result.isEmpty();
     }
 
+    public boolean checkUserName(String username) {
+        List result = em.createNamedQuery("Usertable.findByUsername")
+                .setParameter("username", username)
+                .getResultList();
+        return !result.isEmpty();
+    }
     public Usertable findUserByUsername(String username) {
         Usertable result = (Usertable) em.createNamedQuery("Usertable.findByUsername")
                 .setParameter("username", username)

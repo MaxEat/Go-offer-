@@ -66,7 +66,7 @@
     <wsdl:message name="loginRequest">
         <wsdl:part name="parameters" element="tns:login"/>
     </wsdl:message>
-    <wsdl:portType name="LoginServicePortType">
+    <wsdl:portType name="LoginRegisterServicePortType">
         <wsdl:operation name="register">
             <wsdl:input name="registerRequest" message="tns:registerRequest"/>
             <wsdl:output name="registerResponse" message="tns:registerResponse"/>
@@ -80,7 +80,7 @@
             <wsdl:output name="loginResponse" message="tns:loginResponse"/>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="LoginServiceHttpBinding" type="tns:LoginServicePortType">
+    <wsdl:binding name="LoginRegisterServiceHttpBinding" type="tns:LoginRegisterServicePortType">
         <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="register">
             <wsdlsoap:operation soapAction=""/>
@@ -109,11 +109,11 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="LoginService">
-        <wsdl:port name="LoginServiceHttpPort" binding="tns:LoginServiceHttpBinding">
-            <!--<wsdlsoap:address location="http://localhost:53547/LoginService/LoginService"/>-->
-            <wsdlsoap:address location="http://localhost:8080/LoginService/LoginService"/>
-
+    <wsdl:service name="LoginRegisterService">
+        <wsdl:port name="LoginRegisterServiceHttpPort" binding="tns:LoginRegisterServiceHttpBinding">
+            <!--<wsdlsoap:address location="http://localhost:53547/LoginRegisterService/LoginRegisterService"/>-->
+            <wsdlsoap:address location="http://localhost:8080/LoginRegisterService/LoginRegisterService"/>
+            
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

@@ -7,6 +7,7 @@ package goOffer.ejbs;
 
 import goOffer.entities.Company;
 import goOffer.entities.Job;
+import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -30,6 +31,22 @@ public class dealWithCompanies {
         return result;
     }
     
+    public boolean checkCompanyName(String username) {
+        List result =  em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", username)
+                .getResultList();
+        return !result.isEmpty();
+    }
+            
+    public boolean checkCompany(String username, String password){
+        List result =  em.createNamedQuery("Company.checkCredential")
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
+        Company company = (Company)result.get(0);
+        return company != null;
+    }
+        
     public void addJobToCompanyByUsername(String username, Job job){
         Company c = getCompanyByUsername(username);
         c.getJobs().add(job);
@@ -40,8 +57,37 @@ public class dealWithCompanies {
         c.removeJobFromCompany(jobID);
     }
     
+    public void setAddressByUserName(String address, String name) {
+        List companyList =  em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", name)
+                .getResultList();
+        Company company = (Company)companyList.get(0);
+        if(company!=null)
+            company.setAddress(address);
+    }
     
+    public void setPopulationByUserName(int number, String name) {
+        List companyList = em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", name)
+                .getResultList();
+        Company company = (Company)companyList.get(0);
+        if(company!=null)
+            company.setPopulation(number);
+    }
 
+    public void setCompanyNameByUserName(String companyName, String username) {
+         List companyList = em.createNamedQuery("Company.findByUsername")
+                .setParameter("username", username)
+                .getResultList();
+        Company company = (Company)companyList.get(0);
+        if(company!=null)
+            company.setCompanyName(companyName);       
+    }
+    
+    public void addNewCompany(Company company) {
+        em.persist(company);
+    }
+    
     public void persist(Object object) {
         em.persist(object);
     }
