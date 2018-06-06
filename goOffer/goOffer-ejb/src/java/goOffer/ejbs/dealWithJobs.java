@@ -54,7 +54,7 @@ public class dealWithJobs {
         expiredList =  em.createNamedQuery("Job.findJobsBefore")
                 .setParameter("expirationDate", date)
                 .getResultList();
-       
+        
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
