@@ -5,16 +5,13 @@
  */
 package goOffer.controllers;
 
-import goOffer.ejbs.dealWithCompanies;
+import goOffer.ejbs.ViewingCounter;
 import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
-import goOffer.ejbs.reminderSessionBean;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,17 +25,23 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "user_controller")
 @SessionScoped
 public class UserController implements Serializable{
-
     @EJB
     private dealWithJobs dealWithJobs;
 
     @EJB
     private dealWithUsers dealWithUsers;
 
+    @EJB
+    private ViewingCounter viewingCounter;
 
     
     public UserController() {
 
+    }
+    
+    public void logout() {
+        viewingCounter.lessViews();
+        dealWithUsers.userLogout();
     }
     
     public List<Job> getAppliedJobsWithUsername(String username) {
@@ -60,6 +63,6 @@ public class UserController implements Serializable{
 
     public void applyJob(String username, Job newJob) {
         dealWithUsers.addNewJobToUserByUsername(username, newJob);
-    }
+    }    
     
 }

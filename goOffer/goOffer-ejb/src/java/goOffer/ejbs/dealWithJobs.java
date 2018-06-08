@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,6 +24,8 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
+@Interceptors({LoggingInterceptor.class})
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class dealWithJobs {
 
     @PersistenceContext(unitName = "goOffer-ejbPU")

@@ -29,6 +29,12 @@
                         </f:facet>	
                         <h:outputText value="#{job.jobName}"/>
                     </h:column>
+                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Company"/>
+                        </f:facet>	
+                         <h:outputText value="#{job.company.companyName}"/>
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Location"/>

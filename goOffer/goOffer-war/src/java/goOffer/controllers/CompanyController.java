@@ -170,10 +170,10 @@ public class CompanyController implements Serializable {
     }
 
     public String initialAddressAndPeople(String companyName, String address, int population, String username) {
-        dealWithCompanies.setCompanyNameByUserName(companyName, username);
+   //     dealWithCompanies.setCompanyNameByUserName(companyName, username);
         dealWithCompanies.setAddressByUserName(address, username);
         dealWithCompanies.setPopulationByUserName(population, username);
         return "returnFromCompanyFlow";
     }
-  
+
 }
