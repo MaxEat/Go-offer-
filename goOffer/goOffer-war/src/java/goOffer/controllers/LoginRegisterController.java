@@ -67,10 +67,10 @@ public class LoginRegisterController implements Serializable {
         
     public String callWebServiceRegisterCompany() {
         if(registerCompany(username, password).equals("company exsit")){
-            return "jsf_company_overview.xhtml?redirect=true";
+            return "jsf_user_register.xhtml?redirect=true";
         }
         else
-            return "jsf_company_overview.xhtml?redirect=true";
+            return "companyCreate";
     }
     
 
