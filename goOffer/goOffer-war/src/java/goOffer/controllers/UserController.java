@@ -5,6 +5,8 @@
  */
 package goOffer.controllers;
 
+import goOffer.Rest.entities.Message;
+import goOffer.clientREST.MessageClient;
 import goOffer.ejbs.ViewingCounter;
 import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
@@ -16,6 +18,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.core.GenericType;
 
 /**
  *
@@ -33,7 +36,34 @@ public class UserController implements Serializable{
 
     @EJB
     private ViewingCounter viewingCounter;
+    
+    private MessageClient messageClient = new MessageClient();
+ 
+    private Message message;
+    
+    private List<Message> messageList;
 
+    public List<Message> getMessageList() {
+        GenericType<List<Message>> gt = new GenericType<List<Message>>(){};
+        this.setMessageList(messageClient.findAll_XML(gt));
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
+    public Message getMessage() {
+        Message response = messageClient.find_XML(Message.class, "1");
+        setMessage(response);
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+    
+    
     
     public UserController() {
 
