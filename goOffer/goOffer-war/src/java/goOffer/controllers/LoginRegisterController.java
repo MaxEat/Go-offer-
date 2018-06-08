@@ -5,72 +5,30 @@
  */
 package goOffer.controllers;
 
-import goOffer.ejbs.dealWithUsers;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
  * @author jiahao pan
  */
-@ManagedBean(name = "login_and_register")
+@ManagedBean(name = "login_overview")
 @SessionScoped
-
 public class LoginRegisterController implements Serializable {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl")
+    private LoginRegisterService_Service service;
 
 
     private String username;
     private String password;
     private String result;
 
-    public String callWebServiceLogin() {
-        result = login(username, password);
-        if(result.equals("user exist")){
-            return "jsf_user_overview.xhtml?faces-redirect=true";
-        }
-        else if(result.equals("company exist")){
-            return "jsf_company_overview.xhtml?faces-redirect=true";
-        }
-        else {
-            return "jsf_user_login.xhtml?faces-redirect=true";
-        }
-   
-    }
-    
-    
-    
-    public String callWebServiceRegister() {
-      
-        result = register(username, password);
-        
-        if(result.equals("user exist")){
-            return "jsf_user_register.xhtml?faces-redirect=true";
-        }
-        else
-        {
-            return "jsf_user_overview.xhtml?faces-redirect=true";
-        }
-    }
-
-    public String callWebServiceRegisterCompany() {
-        result = registerCompany(username, password);
-        
-        if(result.equals("company exist")){
-            return "jsf_user_register.xhtml?faces-redirect=true";
-        }
-        else
-        {
-            return "companyCreate";
-        }
-    }
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
+  
+    public LoginRegisterController() {
+     }
 
     public String getUsername() {
         return username;
@@ -88,64 +46,83 @@ public class LoginRegisterController implements Serializable {
         this.password = password;
     }
 
-//    private static String login(java.lang.String name, java.lang.String password) {
-//        try {
-//            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
-//            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
-//            return port.login(name, password);
-//        } catch (Exception ex) {
-//            return ex.toString();
-//        }
-//
-//    }
-//
-//    private static String register(java.lang.String name, java.lang.String password) {
-//        try {
-//
-//            xfiredemo.liuxiang.com.helloservice.LoginService service = new xfiredemo.liuxiang.com.helloservice.LoginService();
-//            xfiredemo.liuxiang.com.helloservice.LoginServicePortType port = service.getLoginServiceHttpPort();
-//            return port.register(name, password);
-//        } catch (Exception ex) {
-//            return ex.toString();
-//        }
-//    }
-
-    
-    
-    
-    private static String registerCompany(java.lang.String name, java.lang.String password) {
-        try{
-            xfiredemo.liuxiang.com.helloservice.LoginRegisterService service = new xfiredemo.liuxiang.com.helloservice.LoginRegisterService();
-            xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType port = service.getLoginRegisterServiceHttpPort();
-            return port.registerCompany(name, password);
-        }catch (Exception ex) {
-            return ex.toString();
-        }
-        
-        
-    }
-
-    private static String login(java.lang.String name, java.lang.String password) {
-        try{
-            xfiredemo.liuxiang.com.helloservice.LoginRegisterService service = new xfiredemo.liuxiang.com.helloservice.LoginRegisterService();
-            xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType port = service.getLoginRegisterServiceHttpPort();
-            return port.login(name, password);
-        }catch (Exception ex) {
-            return ex.toString();
-        }
-        
-    }
-
-    private static String register(java.lang.String name, java.lang.String password) {
-        try{
-            xfiredemo.liuxiang.com.helloservice.LoginRegisterService service = new xfiredemo.liuxiang.com.helloservice.LoginRegisterService();
-            xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType port = service.getLoginRegisterServiceHttpPort();
-            return port.register(name, password);    
-        }catch (Exception ex) {
-            return ex.toString();
-        }
-    }
-
  
+    
+    public String callWebServiceLogin() {
+        if(loginUser(username, password))
+            return "jsf_user_overview.xhtml?redirect=true";
+        if(loginCompany(username, password))
+            return "jsf_company_overview.xhtml?redirect=true";
+        else
+            return "test_error.xhtml";
+    }
 
+    public String callWebServiceRegisterUser() {
+        if(registerUser(username, password).equals("user exsit")){
+            return "jsf_user_register.xhtml?redirect=true";
+        }
+        else
+            return "jsf_user_overview.xhtml?redirect=true";
+    }
+        
+    public String callWebServiceRegisterCompany() {
+        if(registerCompany(username, password).equals("company exsit")){
+            return "jsf_company_overview.xhtml?redirect=true";
+        }
+        else
+            return "jsf_company_overview.xhtml?redirect=true";
+    }
+    
+
+    
+    
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    private boolean loginUser(java.lang.String username, java.lang.String password) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        goOffer.controllers.LoginRegisterService port = service.getLoginRegisterServicePort();
+        return port.loginUser(username, password);
+    }
+
+    private boolean loginCompany(java.lang.String username, java.lang.String password) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        goOffer.controllers.LoginRegisterService port = service.getLoginRegisterServicePort();
+        return port.loginCompany(username, password);
+    }
+
+    private String registerCompany(java.lang.String username, java.lang.String password) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        goOffer.controllers.LoginRegisterService port = service.getLoginRegisterServicePort();
+        return port.registerCompany(username, password);
+    }
+
+    private String registerUser(java.lang.String username, java.lang.String password) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        goOffer.controllers.LoginRegisterService port = service.getLoginRegisterServicePort();
+        return port.registerUser(username, password);
+    }
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    
 }

@@ -29,8 +29,9 @@ public class dealWithUsers {
         return userList;
     }
     
-    public void addNewUser(Usertable newUser) {
-        em.persist(newUser);
+    public void addNewUser(String username, String password) {
+        Usertable user = new Usertable(username, password);
+        em.persist(user);
     }
 
     public boolean checkUser(String username, String password) {
@@ -48,10 +49,10 @@ public class dealWithUsers {
         return !result.isEmpty();
     }
     public Usertable findUserByUsername(String username) {
-        List result =  em.createNamedQuery("Usertable.findByUsername")
+        Usertable result =  (Usertable)em.createNamedQuery("Usertable.findByUsername")
                 .setParameter("username", username)
-                .getResultList();
-        return (Usertable)result.get(0);
+                .getSingleResult();
+        return result;
     }
 
     public void addNewJobToUserByUsername(String username, Job newJob) {

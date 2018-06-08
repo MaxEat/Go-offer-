@@ -7,18 +7,18 @@ package goOffer.service;
 
 import goOffer.ejbs.dealWithCompanies;
 import goOffer.ejbs.dealWithUsers;
-import goOffer.entities.Company;
-import goOffer.entities.Usertable;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.ejb.Stateless;
 
 /**
  *
- * @author jiahao pan
+ * @author max
  */
-@WebService(serviceName = "LoginRegisterService", portName = "LoginRegisterServiceHttpPort", endpointInterface = "xfiredemo.liuxiang.com.helloservice.LoginRegisterServicePortType", targetNamespace = "http://com.liuxiang.xfireDemo/HelloService", wsdlLocation = "META-INF/wsdl/LoginRegisterService/loginRegister.wsdl")
-@Stateless
+@WebService(serviceName = "LoginRegisterService")
+@Stateless()
 public class LoginRegisterService {
 
     @EJB
@@ -27,40 +27,51 @@ public class LoginRegisterService {
     @EJB
     private dealWithUsers dealWithUsers;
 
-    public java.lang.String register(java.lang.String name, java.lang.String password) {
 
-        if (dealWithUsers.checkUserName(name)) {
-            return "user exist";
-        } else {
-            Usertable user = new Usertable(name, password);
-            dealWithUsers.addNewUser(user);
-            return "user created";
-        }
+    /**
+     * Web 服务操作
+     */
+    @WebMethod(operationName = "loginUser")
+    public boolean loginUser(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+        return dealWithUsers.checkUser(username, password);
+  
     }
 
-    public java.lang.String login(java.lang.String name, java.lang.String password) {
+    /**
+     * Web 服务操作
+     */
+    @WebMethod(operationName = "loginCompany")
+    public boolean loginCompany(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+        return dealWithCompanies.checkCompany(username, password);
+    }
 
-        if (dealWithUsers.checkUser(name, password)) {
+    /**
+     * Web 服务操作
+     */
+    @WebMethod(operationName = "registerUser")
+    public String registerUser(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+              
+        if (dealWithUsers.checkUserName(username)) {
             return "user exist";
-        } else if (dealWithCompanies.checkCompany(name, password)) {
-            return "company exist";
         } else {
-            return "not exist";
+            
+            dealWithUsers.addNewUser(username, password);
+            return "user created";
         }
     }
 
     /**
      * Web 服务操作
      */
-    public java.lang.String registerCompany(java.lang.String username, java.lang.String password) {
-
+    @WebMethod(operationName = "registerCompany")
+    public String registerCompany(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+              
         if (dealWithCompanies.checkCompanyName(username)) {
             return "company exist";
         } else {
-            Company company = new Company(username, password);
-            dealWithCompanies.addNewCompany(company);
+            
+            dealWithCompanies.addNewCompany(username, password);
             return "company created";
         }
     }
-
 }

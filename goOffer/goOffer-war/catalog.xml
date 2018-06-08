@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:53547/LoginService/LoginService?wsdl" uri="src/conf/xml-resources/web-service-references/LoginService/wsdl/localhost_53547/LoginService/LoginService.wsdl"/>
+    <system systemId="http://localhost:8080/testService/testService?wsdl" uri="src/conf/xml-resources/web-service-references/testService/wsdl/localhost_8080/testService/testService.wsdl"/>
+    <system systemId="http://localhost:8080/testService/testService?xsd=1" uri="src/conf/xml-resources/web-service-references/testService/wsdl/localhost_8080/testService/testService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TestService/TestService?wsdl" uri="src/conf/xml-resources/web-service-references/TestService_1/wsdl/localhost_8080/TestService/TestService.wsdl"/>
+    <system systemId="http://localhost:8080/TestService/TestService?xsd=1" uri="src/conf/xml-resources/web-service-references/TestService_1/wsdl/localhost_8080/TestService/TestService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/goOffer-war/TestService?wsdl" uri="src/conf/xml-resources/web-service-references/TestService/wsdl/localhost_8080/goOffer-war/TestService.wsdl"/>
+    <system systemId="http://localhost:8080/goOffer-war/TestService?xsd=1" uri="src/conf/xml-resources/web-service-references/TestService/wsdl/localhost_8080/goOffer-war/TestService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl" uri="src/conf/xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl"/>
+    <system systemId="http://localhost:8080/LoginRegisterService/LoginRegisterService?xsd=1" uri="src/conf/xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.xsd_1.xsd"/>
 </catalog>

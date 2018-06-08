@@ -41,10 +41,10 @@ public class testJSP_saveUser extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Usertable newUser = new Usertable();
-        newUser.setUsername(username);
-        newUser.setPassword(password);
-        dealWithUsers.addNewUser(newUser);
+//        Usertable newUser = new Usertable();
+//        newUser.setUsername(username);
+//        newUser.setPassword(password);
+        dealWithUsers.addNewUser(username, password);
         
         List<Usertable> users = dealWithUsers.getAllUsers();
 //        response.sendRedirect("userSaveSuccess.jsp");

@@ -60,6 +60,7 @@
         <!--<welcome-file>faces/jsf_user_overview.xhtml</welcome-file>-->
         <welcome-file>faces/jsf_user_login.xhtml</welcome-file>
         <!--<welcome-file>faces/jsf_entrance.xhtml</welcome-file>-->
+        <!--<welcome-file>faces/test_error.xhtml</welcome-file>-->
 
     </welcome-file-list>
 </web-app>

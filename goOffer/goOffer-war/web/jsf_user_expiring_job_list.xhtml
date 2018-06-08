@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <f:view>
-            <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_overview.expiredList}" var="job">
+            <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_controller.expiredList}" var="job">
                     <f:facet name="header">
                         <h:outputText value="Expiring Jobs:" />
                     </f:facet>
@@ -50,7 +50,7 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="apply" action="#{user_overview.applyJob(userlogin.username, job)}">
+                        <h:commandButton value="apply" action="#{user_controller.applyJob(login_overview.username, job)}">
                             <f:param name="applyJobID" value="#{job.jobID}"/>
                         </h:commandButton>
                     </h:column>   
