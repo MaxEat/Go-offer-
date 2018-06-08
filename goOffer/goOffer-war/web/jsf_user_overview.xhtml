@@ -8,12 +8,12 @@
     </h:head>
     <h:body>
         
-        <h:outputText value="Hello, #{login_and_register.username} !"/>
+        <h:outputText value="Hello, #{login_overview.username} !"/>
         <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />
 
         <f:view>
             <h:form id="dataTableForm">
-                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_overview.getAppliedJobsWithUsername(login_and_register.username)}" var="job">
+                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_controller.getAppliedJobsWithUsername(login_overview.username)}" var="job">
                     <f:facet name="header">
                         <h:outputText value="My Applying Jobs:" />
                     </f:facet>
@@ -60,7 +60,7 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="delete" action="#{user_overview.deleteJob(login_and_register.username)}">
+                        <h:commandButton value="delete" action="#{user_controller.deleteJob(login_overview.username)}">
                             <f:param name="deleteJobID" value="#{job.jobID}" />
                         </h:commandButton>
                     </h:column>   

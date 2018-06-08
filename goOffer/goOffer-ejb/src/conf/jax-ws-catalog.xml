@@ -4,4 +4,5 @@
     <system systemId="http://localhost:53547/LoginService/LoginService?wsdl" uri="wsdl/localhost_53547/LoginService/LoginService.wsdl"/>
     <system systemId="http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl" uri="wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl"/>
     <system systemId="http://localhost:53547/LoginRegisterService/LoginRegisterService?wsdl" uri="wsdl/localhost_53547/LoginRegisterService/LoginRegisterService.wsdl"/>
+    <system systemId="http://localhost:8080/LoginRegisterService/LoginRegisterService?xsd=1" uri="wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.xsd_1.xsd"/>
 </catalog>

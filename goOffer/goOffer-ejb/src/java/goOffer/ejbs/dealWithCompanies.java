@@ -51,8 +51,9 @@ public class dealWithCompanies {
                 .setParameter("username", username)
                 .setParameter("password", password)
                 .getResultList();
-        Company company = (Company) result.get(0);
-        return company != null;
+
+        return !result.isEmpty();
+
     }
 
     public void addJobToCompanyByUsername(String username, Job job) {
@@ -95,7 +96,9 @@ public class dealWithCompanies {
         }
     }
 
-    public void addNewCompany(Company company) {
+    public void addNewCompany(String username, String password) {
+        Company company = new Company(username, password);
+
         em.persist(company);
     }
 

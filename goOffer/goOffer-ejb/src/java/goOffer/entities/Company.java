@@ -31,7 +31,6 @@ import javax.persistence.Table;
     , @NamedQuery(name = "Company.checkCredential", query = "SELECT u FROM Company u WHERE u.username = :username AND u.password = :password")
     , @NamedQuery(name = "Company.findByUsername", query = "SELECT u FROM Company u WHERE u.username = :username")
     , @NamedQuery(name = "Company.findByID", query = "SELECT u FROM Company u WHERE u.id = :id")})
-
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;

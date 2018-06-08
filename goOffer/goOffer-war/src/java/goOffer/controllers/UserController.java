@@ -17,13 +17,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-
 /**
  *
  * @author jiahao pan
  */
 
-@ManagedBean(name = "user_overview")
+@ManagedBean(name = "user_controller")
 @SessionScoped
 public class UserController implements Serializable{
     @EJB
@@ -65,6 +64,5 @@ public class UserController implements Serializable{
     public void applyJob(String username, Job newJob) {
         dealWithUsers.addNewJobToUserByUsername(username, newJob);
     }    
-
     
 }

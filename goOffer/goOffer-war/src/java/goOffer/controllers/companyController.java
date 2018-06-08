@@ -7,6 +7,7 @@ package goOffer.controllers;
 
 import goOffer.ejbs.dealWithCompanies;
 import goOffer.ejbs.dealWithJobs;
+import goOffer.ejbs.dealWithUsers;
 import goOffer.entities.Company;
 import goOffer.entities.Job;
 import goOffer.entities.Job.jobType;
@@ -36,8 +37,10 @@ public class CompanyController implements Serializable {
     private dealWithJobs dealWithJobs;
 
     @EJB
-    private dealWithCompanies dealWithCompanies;
+    private dealWithUsers dealWithUsers;
 
+    @EJB
+    private dealWithCompanies dealWithCompanies;
 
 
     private Boolean addButtonShown = true;
@@ -172,7 +175,5 @@ public class CompanyController implements Serializable {
         dealWithCompanies.setPopulationByUserName(population, username);
         return "returnFromCompanyFlow";
     }
-    
-  
 
 }
