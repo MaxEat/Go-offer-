@@ -5,21 +5,18 @@
  */
 package goOffer.controllers;
 
+import goOffer.ejbs.ViewingCounter;
 import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
-import goOffer.ejbs.reminderSessionBean;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+
 
 /**
  *
@@ -29,15 +26,23 @@ import javax.naming.NamingException;
 @ManagedBean(name = "user_overview")
 @SessionScoped
 public class UserController implements Serializable{
+    @EJB
+    private dealWithJobs dealWithJobs;
 
-    dealWithJobs dealWithJobs = lookupdealWithJobsBean();
+    @EJB
+    private dealWithUsers dealWithUsers;
 
-    reminderSessionBean reminderSessionBean = lookupreminderSessionBeanBean();
+    @EJB
+    private ViewingCounter viewingCounter;
 
-    dealWithUsers dealWithUsers = lookupdealWithUsersBean();
     
     public UserController() {
 
+    }
+    
+    public void logout() {
+        viewingCounter.lessViews();
+        dealWithUsers.userLogout();
     }
     
     public List<Job> getAppliedJobsWithUsername(String username) {
@@ -59,39 +64,7 @@ public class UserController implements Serializable{
 
     public void applyJob(String username, Job newJob) {
         dealWithUsers.addNewJobToUserByUsername(username, newJob);
-    }
-    
-    private dealWithUsers lookupdealWithUsersBean() {
-        try {
-            Context c = new InitialContext();
-            return (dealWithUsers) c.lookup("java:global/goOffer/goOffer-ejb/dealWithUsers!goOffer.ejbs.dealWithUsers");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private reminderSessionBean lookupreminderSessionBeanBean() {
-        try {
-            Context c = new InitialContext();
-            return (reminderSessionBean) c.lookup("java:global/goOffer/goOffer-ejb/reminderSessionBean!goOffer.ejbs.reminderSessionBean");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private dealWithJobs lookupdealWithJobsBean() {
-        try {
-            Context c = new InitialContext();
-            return (dealWithJobs) c.lookup("java:global/goOffer/goOffer-ejb/dealWithJobs!goOffer.ejbs.dealWithJobs");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-    
-    
+    }    
 
     
 }

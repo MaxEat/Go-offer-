@@ -15,7 +15,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -53,6 +55,9 @@ public class Job implements Serializable {
     @Enumerated(EnumType.STRING)
     private jobType type;
    
+    @ManyToOne
+    @JoinColumn(name = "companyID")
+    private Company company;
     
     @ManyToMany(mappedBy="appliedJobs")
     private List<Usertable> appliedUsers;
@@ -60,6 +65,15 @@ public class Job implements Serializable {
     
     public Job() {
     }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+    
     
     public List<Usertable> getAppliedUsers() {
         return appliedUsers;

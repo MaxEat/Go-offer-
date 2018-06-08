@@ -58,7 +58,6 @@ public class Company implements Serializable {
     }
 
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "companyID")
     private List<Job> jobs;
 
     public Company() {
