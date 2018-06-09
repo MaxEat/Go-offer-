@@ -58,7 +58,8 @@
         <!--<welcome-file>faces/jsf_register.xhtml</welcome-file>-->
         <!--<welcome-file>faces/jsf_company_overview.xhtml</welcome-file>-->
         <!--<welcome-file>faces/jsf_user_overview.xhtml</welcome-file>-->
-                <welcome-file>faces/jsf_message_overview.xhtml</welcome-file>
+<!--                <welcome-file>faces/jsf_message_overview.xhtml</welcome-file>-->
+                <welcome-file>faces/jsf_index.xhtml</welcome-file>
 
         <!--<welcome-file>faces/jsf_entrance.xhtml</welcome-file>-->
         <!--<welcome-file>faces/test_error.xhtml</welcome-file>-->

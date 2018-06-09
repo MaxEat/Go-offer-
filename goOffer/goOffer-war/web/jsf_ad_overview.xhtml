@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="adForm1">
+            <br>
+                <h:inputTextarea cols="50" rows="5" value="#{user_controller.newAdContent}">
+                </h:inputTextarea >
+            </br>
+            <br>
+                <h:commandButton value="Submit" action="#{user_controller.addNewAd()}" />
+            </br>
+            </h:form>
+            
+        </f:view>
+        
+<!--        <f:view>
+            <h:form id="adForm2">
+                <h:dataTable rendered="true" border="1" id="adFormTest" value="#{user_controller.getCurrentAd()}" var="a2">
+                    <f:facet name="header">
+                        <h:outputText value="Advertisement" />
+                    </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{a2.id}"/>
+                        </f:facet>	
+                        <h:outputText value="1"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>	
+                        <h:outputText value="#{a2.adcontent}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>-->
+        
+        
+       <f:view>
+            <h:form id="adForm">
+                <h:dataTable rendered="true" border="1" id="adFormTest" value="#{user_controller.getAdLists()}" var="a">
+                    <f:facet name="header">
+                        <h:outputText value="Advertisement" />
+                    </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>	
+                        <h:outputText value="#{a.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>	
+                        <h:outputText value="#{a.adcontent}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
