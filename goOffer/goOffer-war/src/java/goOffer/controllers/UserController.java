@@ -40,13 +40,14 @@ public class UserController implements Serializable{
     private ViewingCounter viewingCounter;
     
     private MessageClient messageClient = new MessageClient();
-        private AdvertisementClient adClient = new AdvertisementClient();
+    private AdvertisementClient adClient = new AdvertisementClient();
 
  
     private Message message;
     
     private List<Message> messageList;
 private Advertisement currentAd;
+private String currentAdString;
     private String newAdContent = "";
         private String adID;
 
@@ -60,11 +61,12 @@ private Advertisement currentAd;
     }
     private List<Advertisement> adList;
     
-     public Advertisement getCurrentAd() {
+     public String getCurrentAd() {
         adID = adClient.countREST();
-        Advertisement response = adClient.find_XML(Advertisement.class, "501");
+        Advertisement response = adClient.find_XML(Advertisement.class, "1");
         setCurrentAd(response);
-        return currentAd;
+        currentAdString = response.getAdcontent();
+        return currentAdString;
 //        return adClient.findAdWithMaxID();
     }
 
@@ -87,6 +89,15 @@ private Advertisement currentAd;
         newAd.setAdcontent(this.newAdContent);
         adClient.create_JSON(newAd);
         return "jsf_ad_overview.xhtml?faces-redirect=true";
+    }
+    
+    public void updateAd(){
+        Advertisement newAd = new Advertisement();
+        newAd.setAdcontent(this.newAdContent);
+        newAd.setId(1);
+        adClient.edit_JSON(newAd,"1");
+        addNewAd();
+//        return "jsf_ad_overview.xhtml?faces-redirect=true";
     }
     
     public List<Message> getMessageList() {

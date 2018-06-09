@@ -10,6 +10,13 @@
         
         <h:outputText value="Hello, #{login_overview.username} !"/>
         <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />
+        
+        <h:form id="adForm2">
+                
+                <h:outputText value="Current Advertisement is : #{user_controller.getCurrentAd()}">
+                              
+                </h:outputText>
+            </h:form>
 
         <f:view>
             <h:form id="dataTableForm">

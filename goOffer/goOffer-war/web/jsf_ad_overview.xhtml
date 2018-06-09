@@ -14,33 +14,20 @@
                 </h:inputTextarea >
             </br>
             <br>
-                <h:commandButton value="Submit" action="#{user_controller.addNewAd()}" />
+                <h:commandButton value="Submit" action="#{user_controller.updateAd()}" />
             </br>
             </h:form>
             
         </f:view>
         
-<!--        <f:view>
+        <f:view>
             <h:form id="adForm2">
-                <h:dataTable rendered="true" border="1" id="adFormTest" value="#{user_controller.getCurrentAd()}" var="a2">
-                    <f:facet name="header">
-                        <h:outputText value="Advertisement" />
-                    </f:facet>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{a2.id}"/>
-                        </f:facet>	
-                        <h:outputText value="1"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Name"/>
-                        </f:facet>	
-                        <h:outputText value="#{a2.adcontent}"/>
-                    </h:column>
-                </h:dataTable>
+                
+                <h:outputText value="Advertisement : #{user_controller.getCurrentAd()}">
+                              
+                </h:outputText>
             </h:form>
-        </f:view>-->
+        </f:view>
         
         
        <f:view>

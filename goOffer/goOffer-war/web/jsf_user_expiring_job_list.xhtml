@@ -9,6 +9,14 @@
     </h:head>
     <h:body>
         <f:view>
+            <h:form id="adForm2">
+                
+                <h:outputText value="Advertisement : #{user_controller.getCurrentAd()}">
+                              
+                </h:outputText>
+            </h:form>
+        </f:view>
+        <f:view>
             <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_controller.expiredList}" var="job">
                     <f:facet name="header">
                         <h:outputText value="Expiring Jobs:" />
