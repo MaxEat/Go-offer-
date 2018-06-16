@@ -17,16 +17,13 @@ import goOffer.entities.Interview;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-<<<<<<< HEAD
 import javax.faces.context.FacesContext;
-import javax.jms.Message;
 import javax.jms.MessageListener;
-=======
 import javax.ws.rs.core.GenericType;
->>>>>>> 576a711fb2238f5f858681c2987655647b14ced0
 
 /**
  *
@@ -34,15 +31,10 @@ import javax.ws.rs.core.GenericType;
  */
 @ManagedBean(name = "user_controller")
 @SessionScoped
-<<<<<<< HEAD
-public class UserController implements Serializable, MessageListener{
+public class UserController implements Serializable{
 
     @EJB
     private dealWithInterviews dealWithInterviews;
-=======
-public class UserController implements Serializable {
-
->>>>>>> 576a711fb2238f5f858681c2987655647b14ced0
     @EJB
     private dealWithJobs dealWithJobs;
 
@@ -56,88 +48,6 @@ public class UserController implements Serializable {
     private List<Job> allJobs;
     private List<Job> appliedJobs;
 
-    private MessageClient messageClient = new MessageClient();
-    private AdvertisementClient adClient = new AdvertisementClient();
-
-    private Message message;
-
-    private List<Message> messageList;
-    private Advertisement currentAd;
-    private String currentAdString;
-    private String newAdContent = "";
-    private String adID;
-
-    public String getNewAdContent() {
-        return newAdContent;
-    }
-
-    public void setNewAdContent(String newAdContent) {
-        this.newAdContent = newAdContent;
-    }
-    private List<Advertisement> adList;
-
-    public String getCurrentAd() {
-        adID = adClient.countREST();
-        Advertisement response = adClient.find_XML(Advertisement.class, "1");
-        setCurrentAd(response);
-        currentAdString = response.getAdcontent();
-        return currentAdString;
-//        return adClient.findAdWithMaxID();
-    }
-
-    public void setCurrentAd(Advertisement currentAd) {
-        this.currentAd = currentAd;
-    }
-
-    public List<Advertisement> getAdLists() {
-        GenericType<List<Advertisement>> gt = new GenericType<List<Advertisement>>() {
-        };
-        this.setAdLists(adClient.findAll_XML(gt));
-        return adList;
-    }
-
-    public void setAdLists(List<Advertisement> adList) {
-        this.adList = adList;
-    }
-//    
-
-    public String addNewAd() {
-        Advertisement newAd = new Advertisement();
-        newAd.setAdcontent(this.newAdContent);
-        adClient.create_JSON(newAd);
-        return "jsf_ad_overview.xhtml?faces-redirect=true";
-    }
-
-    public void updateAd() {
-        Advertisement newAd = new Advertisement();
-        newAd.setAdcontent(this.newAdContent);
-        newAd.setId(1);
-        adClient.edit_JSON(newAd, "1");
-        addNewAd();
-//        return "jsf_ad_overview.xhtml?faces-redirect=true";
-    }
-
-    public List<Message> getMessageList() {
-        GenericType<List<Message>> gt = new GenericType<List<Message>>() {
-        };
-        this.setMessageList(messageClient.findAll_XML(gt));
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
-
-    public Message getMessage() {
-        Message response = messageClient.find_XML(Message.class, "1");
-        setMessage(response);
-        return message;
-    }
-
-    public void setMessage(Message message) {
-        this.message = message;
-    }
-
     public UserController() {
 
     }
@@ -147,22 +57,12 @@ public class UserController implements Serializable {
         dealWithUsers.userLogout();
     }
 
-    public List<Job> getAppliedJobsWithUsername(String username) {
-<<<<<<< HEAD
-        return dealWithUsers.findUserByUsername(username).getAppliedJobs();
-    }
     
     public List<Interview> getInterviews(String username) {
         return dealWithInterviews.getInterviewByUsername(username);
     }
-    public String deleteJob(String username) {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        long deleteID = Long.parseLong(params.get("deleteJobID"));
-        dealWithUsers.removeJobFromUserByUsername(username, deleteID);
-//        dealWithJobs.deleteJobWithJobID(deleteID);
-        return "jsf_user_overview.xhtml?faces-redirect=true";
-=======
+    public List<Job> getAppliedJobsWithUsername(String username) {
+       
         currentViews = viewingCounter.getViews();
         allJobs = dealWithJobs.getAllJobs();
         appliedJobs = dealWithUsers.findUserByUsername(username).getAppliedJobs();
@@ -185,7 +85,6 @@ public class UserController implements Serializable {
             }
         }
         return false;
->>>>>>> 576a711fb2238f5f858681c2987655647b14ced0
     }
 
     public List<Job> getExpiredList() {
@@ -194,23 +93,13 @@ public class UserController implements Serializable {
 
     public String applyJob(String username, Job newJob) {
         dealWithUsers.addNewJobToUserByUsername(username, newJob);
-<<<<<<< HEAD
+        return "classified/jsf_user_overview.xhtml?faces-redirect=true";
     }    
-
-    @Override
-    public void onMessage(Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-=======
-        return "jsf_user_overview.xhtml?faces-redirect=true";
-    }
-
-    public String unapplyJob(String username, Job job) {
+        
+    public String unapplyJob(String username, Job job){
         dealWithUsers.removeJobFromUserByUsername(username, job);
-        return "jsf_user_overview.xhtml?faces-redirect=true";
+        return "classified/jsf_user_overview.xhtml?faces-redirect=true";
     }
-
     public int getCurrentViews() {
         return currentViews;
     }
@@ -223,5 +112,4 @@ public class UserController implements Serializable {
         return appliedJobs;
     }
 
->>>>>>> 576a711fb2238f5f858681c2987655647b14ced0
 }
