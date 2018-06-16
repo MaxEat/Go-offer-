@@ -110,7 +110,6 @@ public class LoginRegisterController implements Serializable {
             identity = "company"; 
             return "jsf_company_overview.xhtml?redirect=true";
         }
-
     }
 
     public String getResult() {
