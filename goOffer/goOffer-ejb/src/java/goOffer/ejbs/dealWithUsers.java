@@ -10,7 +10,6 @@ import goOffer.entities.Usertable;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.ejb.Remove;
@@ -26,13 +25,16 @@ import javax.persistence.PersistenceContext;
 @StatefulTimeout(unit = TimeUnit.MINUTES, value = 30)
 @LocalBean
 public class dealWithUsers {
-
-    @EJB
-    private ViewingCounter viewingCounter;
-
+    
     @PersistenceContext(unitName = "goOffer-ejbPU")
     private EntityManager em;
-   
+    
+    public dealWithUsers() {
+    }
+    
+    @Remove
+    public void userLogout() {
+    }
 
     public List getAllUsers() {
         List userList = em.createNamedQuery("Usertable.findAll").getResultList();
@@ -44,10 +46,6 @@ public class dealWithUsers {
         em.persist(user);
     }
     
-     @Remove
-    public void userLogout() {
-    }
-
     public boolean checkUser(String username, String password) {
         List result =  em.createNamedQuery("Usertable.checkCredential")
                 .setParameter("username", username)
@@ -74,10 +72,10 @@ public class dealWithUsers {
         System.out.print(u.toString());
         u.addJob(newJob);
     }
-
-    public void removeJobFromUserByUsername(String username, long jobID) {
+    
+    public void removeJobFromUserByUsername(String username, Job job) {
         Usertable u = findUserByUsername(username);
-        u.removeJob(jobID);
+        u.removeJob(job);
     }
 
     public void persist(Object object) {

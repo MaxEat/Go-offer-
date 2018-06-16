@@ -28,8 +28,8 @@
     </target>
     <target name="wsimport-client-LoginRegisterService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" destdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl" xnocompile="true" xendorsed="true" package="goOffer.controllers">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" destdir="${build.generated.dir}/jax-wsCache/LoginRegisterService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_53547/LoginRegisterService/LoginRegisterService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:53547/LoginRegisterService/LoginRegisterService?wsdl" xnocompile="true" xendorsed="true" package="goOffer.controllers">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/LoginRegisterService/wsdl/localhost_53547/LoginRegisterService/LoginRegisterService.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">

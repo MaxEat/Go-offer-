@@ -15,7 +15,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author max
+ * @author jiahao pan
  */
 @WebService(serviceName = "LoginRegisterService")
 @Stateless()
@@ -26,9 +26,9 @@ public class LoginRegisterService {
 
     @EJB
     private dealWithUsers dealWithUsers;
-
-
-    /**
+    
+    
+       /**
      * Web 服务操作
      */
     @WebMethod(operationName = "loginUser")

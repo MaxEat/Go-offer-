@@ -8,8 +8,6 @@ package goOffer.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -106,32 +104,16 @@ public class Usertable implements Serializable {
     }
     
     public void addJob(Job newJob){
-        //检查在不在appliedJobs里面
+        // check whether in appliedJobs
         appliedJobs.add(newJob);
         if (!newJob.getAppliedUsers().contains(this)) {
             newJob.getAppliedUsers().add(this);
         }
     }
     
-    public void removeJob(long jobID) {
-        Job removedJob = new Job();
-        
-        for (Job job : appliedJobs) {
-            if (job.getJobID() == jobID) {
-                removedJob = job;
-                appliedJobs.remove(job);
-                break;
-            }
-        }
-        
-        List<Usertable> list = removedJob.getAppliedUsers();
-        for (Usertable u : list) {
-            if (Objects.equals(u.getUserid(), this.userid)) {
-                list.remove(u);
-                break;
-            }   
-        }
-
+    public void removeJob(Job job) {
+        appliedJobs.remove(job);
+        job.getAppliedUsers().remove(this);
     }
 
     @Override
