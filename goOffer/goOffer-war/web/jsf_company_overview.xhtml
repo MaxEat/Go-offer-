@@ -8,6 +8,7 @@
         <title>Hello, this is the your company overview</title>
     </h:head>
     <h:body>
+        
         <h:outputText value="Name: #{company_overview.getCompanyNameByUsername(login_overview.username)}"/>
         <br/>
         <h:outputText value="Address: #{company_overview.getCompanyAddressByUsername(login_overview.username)}"/>
@@ -54,6 +55,11 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
+                        <h:commandButton value="see applicants" action="#{company_overview.applicantsOverview(job.jobID)}">
+                            <f:param name="deleteJobID" value="#{job.jobID}"/>
+                        </h:commandButton>
+                    </h:column>
+                    <h:column>
                         <h:commandButton value="delete" action="#{company_overview.deleteJob(login_overview.username)}">
                             <f:param name="deleteJobID" value="#{job.jobID}"/>
                         </h:commandButton>
@@ -90,8 +96,10 @@
                 <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm"/>
             </h:inputText>
             <br/>
-            <h:commandButton value="Submit"  action="#{company_overview.addNewJob(userlogin.username)}"/>
+            <h:commandButton value="Submit"  action="#{company_overview.addNewJob(login_overview.username)}"/>
         </h:form>
+ 
+        
     </h:body>
 </html>
 

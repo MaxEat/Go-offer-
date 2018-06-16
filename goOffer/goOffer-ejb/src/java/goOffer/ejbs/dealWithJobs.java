@@ -6,6 +6,7 @@
 package goOffer.ejbs;
 
 import goOffer.entities.Job;
+import goOffer.entities.Usertable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,7 +46,6 @@ public class dealWithJobs {
     }
 
     
-    
     public List<Job> getExpiredJobs() {
         return expiredList;
     }
@@ -59,6 +59,14 @@ public class dealWithJobs {
         expiredList =  em.createNamedQuery("Job.findJobsBefore")
                 .setParameter("expirationDate", date)
                 .getResultList();
+        
+    }
+    
+    public List<Usertable> getApplicantsByJobID(long id) {
+        Job job = (Job) em.createNamedQuery("Job.findById")
+                .setParameter("jobID", id)
+                .getSingleResult();
+        return job.getAppliedUsers();
         
     }
     // Add business logic below. (Right-click in editor and choose

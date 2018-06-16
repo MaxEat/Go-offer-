@@ -50,24 +50,24 @@ public class LoginRegisterController implements Serializable {
     
     public String callWebServiceLogin() {
         if(loginUser(username, password))
-            return "jsf_user_overview.xhtml?redirect=true";
+            return "jsf_user_overview.xhtml?faces-redirect=true";
         if(loginCompany(username, password))
-            return "jsf_company_overview.xhtml?redirect=true";
+            return "jsf_company_overview.xhtml?faces-redirect=true";
         else
             return "test_error.xhtml";
     }
 
     public String callWebServiceRegisterUser() {
         if(registerUser(username, password).equals("user exsit")){
-            return "jsf_user_register.xhtml?redirect=true";
+            return "jsf_user_register.xhtml?faces-redirect=true";
         }
         else
-            return "jsf_user_overview.xhtml?redirect=true";
+            return "jsf_user_overview.xhtml?faces-redirect=true";
     }
         
     public String callWebServiceRegisterCompany() {
         if(registerCompany(username, password).equals("company exsit")){
-            return "jsf_user_register.xhtml?redirect=true";
+            return "jsf_user_register.xhtml?faces-redirect=true";
         }
         else
             return "companyCreate";

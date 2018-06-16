@@ -30,7 +30,10 @@ import javax.persistence.Table;
     @NamedQuery(name = "Company.findAll", query = "SELECT u FROM Company u")
     , @NamedQuery(name = "Company.checkCredential", query = "SELECT u FROM Company u WHERE u.username = :username AND u.password = :password")
     , @NamedQuery(name = "Company.findByUsername", query = "SELECT u FROM Company u WHERE u.username = :username")
-    , @NamedQuery(name = "Company.findByID", query = "SELECT u FROM Company u WHERE u.id = :id")})
+    , @NamedQuery(name = "Company.findByID", query = "SELECT u FROM Company u WHERE u.id = :id")
+    , @NamedQuery(name = "Company.updateAddress", query = "UPDATE Company u SET u.address = :address WHERE u.username = :username")    
+    , @NamedQuery(name = "Company.updateCompanyName", query = "UPDATE Company u SET u.companyName = :companyName WHERE u.username = :username")
+    , @NamedQuery(name = "Company.updatePopulation", query = "UPDATE Company u SET u.population = :population WHERE u.username = :username")})
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;

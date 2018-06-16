@@ -9,8 +9,8 @@
     <h:body>
         
         <h:outputText value="Hello, #{login_overview.username} !"/>
-        <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />
-
+        <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />     
+        <h:button value="My Interview" outcome="jsf_user_interview" />  
         <f:view>
             <h:form id="dataTableForm">
                 <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_controller.getAppliedJobsWithUsername(login_overview.username)}" var="job">

@@ -6,8 +6,10 @@
 package goOffer.controllers;
 
 import goOffer.ejbs.ViewingCounter;
+import goOffer.ejbs.dealWithInterviews;
 import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
+import goOffer.entities.Interview;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +18,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.jms.Message;
+import javax.jms.MessageListener;
 
 /**
  *
@@ -24,7 +28,10 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "user_controller")
 @SessionScoped
-public class UserController implements Serializable{
+public class UserController implements Serializable, MessageListener{
+
+    @EJB
+    private dealWithInterviews dealWithInterviews;
     @EJB
     private dealWithJobs dealWithJobs;
 
@@ -48,6 +55,9 @@ public class UserController implements Serializable{
         return dealWithUsers.findUserByUsername(username).getAppliedJobs();
     }
     
+    public List<Interview> getInterviews(String username) {
+        return dealWithInterviews.getInterviewByUsername(username);
+    }
     public String deleteJob(String username) {
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
@@ -64,5 +74,10 @@ public class UserController implements Serializable{
     public void applyJob(String username, Job newJob) {
         dealWithUsers.addNewJobToUserByUsername(username, newJob);
     }    
+
+    @Override
+    public void onMessage(Message message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

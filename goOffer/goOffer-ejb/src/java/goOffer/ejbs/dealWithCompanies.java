@@ -67,33 +67,29 @@ public class dealWithCompanies {
     }
 
     public void setAddressByUserName(String address, String name) {
-        List companyList = em.createNamedQuery("Company.findByUsername")
-                .setParameter("username", name)
-                .getResultList();
-        Company company = (Company) companyList.get(0);
-        if (company != null) {
-            company.setAddress(address);
-        }
+       
+        Company c = getCompanyByUsername(name);
+        c.setAddress(address);
+//        em.find(Company, name)
+//        em.createNamedQuery("Company.updateAddress")
+//                .setParameter("address", address)
+//                .setParameter("username", name)
+//                .executeUpdate();
+      
     }
 
     public void setPopulationByUserName(int number, String name) {
-        List companyList = em.createNamedQuery("Company.findByUsername")
-                .setParameter("username", name)
-                .getResultList();
-        Company company = (Company) companyList.get(0);
-        if (company != null) {
-            company.setPopulation(number);
-        }
+                
+        Company c = getCompanyByUsername(name);
+        c.setPopulation(number);
+      
     }
 
     public void setCompanyNameByUserName(String companyName, String username) {
-        List companyList = em.createNamedQuery("Company.findByUsername")
-                .setParameter("username", username)
-                .getResultList();
-        Company company = (Company) companyList.get(0);
-        if (company != null) {
-            company.setCompanyName(companyName);
-        }
+        
+        Company c = getCompanyByUsername(username);
+        c.setCompanyName(companyName);
+        
     }
 
     public void addNewCompany(String username, String password) {

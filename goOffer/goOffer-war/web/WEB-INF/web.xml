@@ -8,6 +8,10 @@
         <param-name>javax.faces.CLIENT_WINDOW_MODE</param-name>
         <param-value>url</param-value>
     </context-param>
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>/WEB-INF/jsf_company_applicants_overview.xml</param-value>
+    </context-param>
     <servlet>
         <servlet-name>testJSP_saveUser</servlet-name>
         <servlet-class>goOffer.servlets.testJSP_saveUser</servlet-class>
@@ -61,6 +65,5 @@
         <welcome-file>faces/jsf_user_login.xhtml</welcome-file>
         <!--<welcome-file>faces/jsf_entrance.xhtml</welcome-file>-->
         <!--<welcome-file>faces/test_error.xhtml</welcome-file>-->
-
     </welcome-file-list>
 </web-app>
