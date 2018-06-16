@@ -11,27 +11,27 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 /**
- * Jersey REST client generated for REST resource:AdvertisementFacadeREST
- * [gooffer.rest.entities.advertisement]<br>
+ * Jersey REST client generated for REST resource:AdFacadeREST
+ * [gooffer.rest.entities.ad]<br>
  * USAGE:
  * <pre>
- *        AdvertisementClient client = new AdvertisementClient();
+ *        AdClient client = new AdClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
  * </pre>
  *
- * @author ASUS
+ * @author jiahao pan
  */
-public class AdvertisementClient {
+public class AdClient {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:53547/goOffer-war/webresources";
 
-    public AdvertisementClient() {
+    public AdClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("gooffer.rest.entities.advertisement");
+        webTarget = client.target(BASE_URI).path("gooffer.rest.entities.ad");
     }
 
     public String countREST() throws ClientErrorException {
@@ -98,7 +98,7 @@ public class AdvertisementClient {
         client.close();
     }
     
-    public <T> T findAll_XML(GenericType<T> gt) throws ClientErrorException{
+     public <T> T findAll_XML(GenericType<T> gt) throws ClientErrorException{
         WebTarget resource = webTarget;
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(gt);
     }

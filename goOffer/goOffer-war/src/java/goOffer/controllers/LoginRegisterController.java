@@ -57,7 +57,7 @@ public class LoginRegisterController implements Serializable {
     public void logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("jsf_user_login.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../jsf_user_login.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(LoginRegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,10 +70,10 @@ public class LoginRegisterController implements Serializable {
     public String isLoggedInForward() {
         if (isLoggedIn()) {
             if ("user".equals(identity)) {
-                return "jsf_user_overview.xhtml?redirect=true";
+                return "classified/jsf_user_overview.xhtml?redirect=true";
             }
             if ("company".equals(identity)) {
-                return "jsf_company_overview.xhtml?redirect=true";
+                return "classified/jsf_company_overview.xhtml?redirect=true";
             }
         }
         return null;
@@ -83,11 +83,11 @@ public class LoginRegisterController implements Serializable {
         if (loginUser(username, password)) {
             viewingCounter.moreViews();
             identity = "user"; 
-            return "jsf_user_overview.xhtml?redirect=true";
+            return "classified/jsf_user_overview.xhtml?redirect=true";
         }
         if (loginCompany(username, password)) {
             identity = "company"; 
-            return "jsf_company_overview.xhtml?redirect=true";
+            return "classified/jsf_company_overview.xhtml?redirect=true";
         } else {
             return "test_error.xhtml";
         }
@@ -98,17 +98,17 @@ public class LoginRegisterController implements Serializable {
             return "jsf_user_register.xhtml?redirect=true";
         } else {
             identity = "user"; 
-            return "jsf_user_overview.xhtml?redirect=true";
+            return "classified/jsf_user_overview.xhtml?redirect=true";
         }
 
     }
 
     public String callWebServiceRegisterCompany() {
         if (registerCompany(username, password).equals("company exsit")) {
-            return "jsf_company_overview.xhtml?redirect=true";
+            return "classified/jsf_company_overview.xhtml?redirect=true";
         } else {
             identity = "company"; 
-            return "jsf_company_overview.xhtml?redirect=true";
+            return "classified/jsf_company_overview.xhtml?redirect=true";
         }
     }
 

@@ -75,7 +75,7 @@ public class CompanyController implements Serializable {
     public String addButtonListener() {
         addButtonShown = false;
         addFormShown = true;
-        return "jsf_company_overview.xhtml?faces-redirect=true";
+        return "classified/jsf_company_overview.xhtml?faces-redirect=true";
     }
 
     public String addNewJob(String username) {
@@ -91,7 +91,7 @@ public class CompanyController implements Serializable {
         
         dealWithCompanies.addJobToCompanyByUsername(username, newjob);
 
-        return "jsf_company_overview.xhtml?faces-redirect=true";
+        return "classified/jsf_company_overview.xhtml?faces-redirect=true";
     }
 
     public String deleteJob(String username) {
@@ -101,7 +101,7 @@ public class CompanyController implements Serializable {
         dealWithCompanies.removeJobFromCompanyByUsername(username, deleteID);
         dealWithJobs.deleteJobWithJobID(deleteID);
 
-        return "jsf_company_overview.xhtml?faces-redirect=true";
+        return "classified/jsf_company_overview.xhtml?faces-redirect=true";
     }
 
    

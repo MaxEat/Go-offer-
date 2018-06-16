@@ -18,13 +18,10 @@
         <h:outputText value="Current viewers: #{user_controller.currentViews}"/>
         <br/>
         <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />
-        
+
         <h:form id="adForm2">
-                
-                <h:outputText value="Current Advertisement is : #{user_controller.getCurrentAd()}">
-                              
-                </h:outputText>
-            </h:form>
+            <h:outputText value="Current Advertisement is : #{admin_controller.getCurrentAd()}"/>
+        </h:form>
 
         <f:view>
             <h:form>

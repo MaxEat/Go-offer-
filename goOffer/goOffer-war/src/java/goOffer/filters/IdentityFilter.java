@@ -29,12 +29,15 @@ public class IdentityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         LoginRegisterController lrc = (LoginRegisterController)request.getSession().getAttribute("login_overview");
         String loginURL = request.getContextPath() + "/jsf_user_login.xhtml";
-//        String logoutURL = request.getContextPath() + "/jsf_logout.xhtml";
+        String adURL = request.getContextPath() + "/jsf_index.xhtml";
+        String adOverviewURL = request.getContextPath() + "/jsf_ad_overview.xhtml";
         boolean loginRequest = request.getRequestURI().equals(loginURL);
-//        boolean logoutRequest = request.getRequestURI().equals(logoutURL);
+        boolean adRequest = request.getRequestURI().equals(adURL);
+        boolean adOverviewRequest = request.getRequestURI().equals(adOverviewURL);
+
         
         
-        if (loginRequest) {
+        if (loginRequest || adRequest || adOverviewRequest) {
             chain.doFilter(request, response);
             return;
         }

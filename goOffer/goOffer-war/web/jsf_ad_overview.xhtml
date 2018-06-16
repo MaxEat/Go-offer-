@@ -10,11 +10,11 @@
         <f:view>
             <h:form id="adForm1">
             <br>
-                <h:inputTextarea cols="50" rows="5" value="#{user_controller.newAdContent}">
+                <h:inputTextarea cols="50" rows="5" value="#{admin_controller.newAdContent}">
                 </h:inputTextarea >
             </br>
             <br>
-                <h:commandButton value="Submit" action="#{user_controller.updateAd()}" />
+                <h:commandButton value="Submit" action="#{admin_controller.updateAd()}" />
             </br>
             </h:form>
             
@@ -23,7 +23,7 @@
         <f:view>
             <h:form id="adForm2">
                 
-                <h:outputText value="Advertisement : #{user_controller.getCurrentAd()}">
+                <h:outputText value="Advertisement : #{admin_controller.getCurrentAd()}">
                               
                 </h:outputText>
             </h:form>
@@ -32,7 +32,7 @@
         
        <f:view>
             <h:form id="adForm">
-                <h:dataTable rendered="true" border="1" id="adFormTest" value="#{user_controller.getAdLists()}" var="a">
+                <h:dataTable rendered="true" border="1" id="adFormTest" value="#{admin_controller.getAdLists()}" var="a">
                     <f:facet name="header">
                         <h:outputText value="Advertisement" />
                     </f:facet>
