@@ -5,15 +5,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Personal overview</title>
+        <f:metadata>
+        </f:metadata>
     </h:head>
     <h:body>
-        
-        <h:outputText value="Hello, #{login_overview.username} !"/>
+
+        <h:outputText value="Hello, #{login_overview.username} !"/> 
+        <h:form>
+            <h:commandButton value="Logout" action="#{login_overview.logout()}"/>
+        </h:form>
+        <br/>
+        <h:outputText value="Current viewers: #{user_controller.currentViews}"/>
+        <br/>
         <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />
 
         <f:view>
-            <h:form id="dataTableForm">
-                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{user_controller.getAppliedJobsWithUsername(login_overview.username)}" var="job">
+            <h:form>
+                <h:dataTable rendered="true" border="1" value="#{user_controller.getAppliedJobsWithUsername(login_overview.username)}" var="job">
                     <f:facet name="header">
                         <h:outputText value="My Applying Jobs:" />
                     </f:facet>
@@ -29,11 +37,11 @@
                         </f:facet>	
                         <h:outputText value="#{job.jobName}"/>
                     </h:column>
-                     <h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Company"/>
                         </f:facet>	
-                         <h:outputText value="#{job.company.companyName}"/>
+                        <h:outputText value="#{job.company.companyName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
@@ -60,9 +68,64 @@
                         <h:outputText value="#{job.expirationDate}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="delete" action="#{user_controller.deleteJob(login_overview.username)}">
-                            <f:param name="deleteJobID" value="#{job.jobID}" />
-                        </h:commandButton>
+                        <h:commandButton value="unapply" action="#{user_controller.unapplyJob(login_overview.username, job)}"/>
+                    </h:column>   
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        <br/>
+        <br/>
+        <f:view>
+            <h:form>
+                <h:dataTable rendered="true" border="1"  value="#{user_controller.allJobs}" var="job">
+                    <f:facet name="header">
+                        <h:outputText value="Available Jobs:" />
+                    </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.jobID}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.jobName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Company"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.company.companyName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Location"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.location}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Type"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.type}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Expiration Date"/>
+                        </f:facet>	
+                        <h:outputText value="#{job.expirationDate}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="apply" rendered="#{user_controller.decideApplyVisable(job.jobID)}" action="#{user_controller.applyJob(login_overview.username, job)}"/>
+                        <h:commandButton value="unapply" rendered="#{user_controller.decideUnApplyVisable(job.jobID)}" action="#{user_controller.unapplyJob(login_overview.username, job)}"/>
                     </h:column>   
                 </h:dataTable>
             </h:form>

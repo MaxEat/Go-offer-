@@ -9,10 +9,6 @@
         <param-value>url</param-value>
     </context-param>
     <servlet>
-        <servlet-name>testJSP_saveUser</servlet-name>
-        <servlet-class>goOffer.servlets.testJSP_saveUser</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>servlet_company_overview</servlet-name>
         <servlet-class>goOffer.servlets.servlet_company_overview</servlet-class>
     </servlet>
@@ -29,10 +25,14 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>testJSP_saveUser</servlet-name>
-        <url-pattern>/testJSP_saveUser</url-pattern>
-    </servlet-mapping>
+    <filter>
+        <filter-name>IdentityFilter</filter-name>
+        <filter-class>goOffer.filters.IdentityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>IdentityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet-mapping>
         <servlet-name>servlet_company_overview</servlet-name>
         <url-pattern>/servlet_company_overview</url-pattern>
@@ -47,7 +47,8 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <!--<url-pattern>/faces/*</url-pattern>-->
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -58,9 +59,8 @@
         <!--<welcome-file>faces/jsf_register.xhtml</welcome-file>-->
         <!--<welcome-file>faces/jsf_company_overview.xhtml</welcome-file>-->
         <!--<welcome-file>faces/jsf_user_overview.xhtml</welcome-file>-->
-        <welcome-file>faces/jsf_user_login.xhtml</welcome-file>
+        <welcome-file>jsf_user_login.xhtml</welcome-file>
         <!--<welcome-file>faces/jsf_entrance.xhtml</welcome-file>-->
         <!--<welcome-file>faces/test_error.xhtml</welcome-file>-->
-
     </welcome-file-list>
 </web-app>

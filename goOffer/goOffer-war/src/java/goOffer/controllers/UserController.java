@@ -11,17 +11,14 @@ import goOffer.ejbs.dealWithUsers;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
  * @author jiahao pan
  */
-
 @ManagedBean(name = "user_controller")
 @SessionScoped
 public class UserController implements Serializable{
@@ -33,10 +30,13 @@ public class UserController implements Serializable{
 
     @EJB
     private ViewingCounter viewingCounter;
-
+    
+    private int currentViews;
+    private List<Job> allJobs;
+    private List<Job> appliedJobs;
     
     public UserController() {
-
+        
     }
     
     public void logout() {
@@ -45,24 +45,50 @@ public class UserController implements Serializable{
     }
     
     public List<Job> getAppliedJobsWithUsername(String username) {
-        return dealWithUsers.findUserByUsername(username).getAppliedJobs();
+        currentViews = viewingCounter.getViews();
+        allJobs = dealWithJobs.getAllJobs();
+        appliedJobs = dealWithUsers.findUserByUsername(username).getAppliedJobs();
+        return appliedJobs;
     }
     
-    public String deleteJob(String username) {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        long deleteID = Long.parseLong(params.get("deleteJobID"));
-        dealWithUsers.removeJobFromUserByUsername(username, deleteID);
-//        dealWithJobs.deleteJobWithJobID(deleteID);
-        return "jsf_user_overview.xhtml?faces-redirect=true";
+    public boolean decideApplyVisable(long jobID) {
+        for (Job job : appliedJobs) {
+            if (job.getJobID() == jobID) return false;
+        }
+        return true;
+    }
+    
+    public boolean decideUnApplyVisable(long jobID) {
+        for (Job job : appliedJobs) {
+            if (job.getJobID() == jobID) return true;
+        }
+        return false;
     }
 
     public List<Job> getExpiredList() {
         return dealWithJobs.getExpiredJobs();
     }
 
-    public void applyJob(String username, Job newJob) {
+    public String applyJob(String username, Job newJob) {
         dealWithUsers.addNewJobToUserByUsername(username, newJob);
-    }    
+        return "jsf_user_overview.xhtml?faces-redirect=true";
+    }   
+    
+    public String unapplyJob(String username, Job job) {
+        dealWithUsers.removeJobFromUserByUsername(username, job);
+        return "jsf_user_overview.xhtml?faces-redirect=true";
+    }  
+
+    public int getCurrentViews() {
+        return currentViews;
+    }
+
+    public List<Job> getAllJobs() {
+        return allJobs;
+    }
+
+    public List<Job> getAppliedJobs() {
+        return appliedJobs;
+    }
     
 }

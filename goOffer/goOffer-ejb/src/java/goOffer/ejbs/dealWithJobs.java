@@ -33,6 +33,12 @@ public class dealWithJobs {
     
     List<Job> expiredList;
     
+    public List<Job> getAllJobs() {
+        List<Job> allJobs;
+        allJobs = em.createNamedQuery("Job.findAll").getResultList();
+        return allJobs;
+    }
+    
     public void deleteJobWithJobID(long jobID)
     {
         em.createNamedQuery("Job.deleteByID")
@@ -61,6 +67,5 @@ public class dealWithJobs {
                 .getResultList();
         
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+   
 }

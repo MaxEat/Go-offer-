@@ -22,15 +22,17 @@ public class LoggingInterceptor {
         Object interceptedObject = invocationContext.getTarget();
         Method interceptedMethod = invocationContext.getMethod();
         
-        System.out.println("Entering " + 
+        System.out.println("----------> Entering " + 
                 interceptedObject.getClass().getName() + "." +
-                interceptedMethod.getName() + "()");
+                interceptedMethod.getName() + "()" + 
+                "<----------");
         
         Object o = invocationContext.proceed();
         
-        System.out.println("Leaving " + 
+        System.out.println("----------> Leaving " + 
                 interceptedObject.getClass().getName() + "." +
-                interceptedMethod.getName() + "()");
+                interceptedMethod.getName() + "()" +
+                "<----------");
         return o;
     }
     
