@@ -15,6 +15,30 @@
                     <file>${reference.goOffer-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
+                <library>
+                    <file>${file.reference.activation.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${file.reference.imap.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${file.reference.mail.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${file.reference.mailapi.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${file.reference.pop3.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${file.reference.smtp.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
             </web-module-additional-libraries>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">

@@ -7,13 +7,18 @@
     </h:head>
     <h:body>
         <h:form>
+            <h:outputText value="#{login_overview.username} check your company info:" />
+            <br />
+            <h:outputText value="Name: #{companyFlow.companyName}" />
+            <br />
             <h:outputText value="Population #{companyFlow.population} items" />
             <br />
             <h:outputText value="Address: #{companyFlow.address}" />
             <br />
+            
             <h:commandButton value="Return" action="companyCreate-address" />
             <!--(String companyName, String address, int population, String username)-->
-            <h:commandButton value="Submit" action="#{company_overview.initialAddressAndPeople(companyFlow.companyName,  companyFlow.address, companyFlow.population, userlogin.username)}" />
+            <h:commandButton value="Submit" action="#{company_overview.initialAddressAndPeople(companyFlow.companyName,  companyFlow.address, companyFlow.population, login_overview.username)}" />
         </h:form>
     </h:body>
 </html>

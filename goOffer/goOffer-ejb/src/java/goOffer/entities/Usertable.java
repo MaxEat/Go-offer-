@@ -6,6 +6,7 @@
 package goOffer.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -47,10 +49,9 @@ public class Usertable implements Serializable {
     @Basic(optional = false)
     @Column(name = "PASSWORD")
     private String password;
-    
-    @ManyToMany
     @JoinTable(name="UsersAndJobs")
     private List<Job> appliedJobs;
+   
 
     public Usertable() {
     }

@@ -10,14 +10,19 @@ import goOffer.Rest.entities.Message;
 import goOffer.clientREST.AdClient;
 import goOffer.clientREST.MessageClient;
 import goOffer.ejbs.ViewingCounter;
+import goOffer.ejbs.dealWithInterviews;
 import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
+import goOffer.entities.Interview;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.jms.MessageListener;
 import javax.ws.rs.core.GenericType;
 
 /**
@@ -26,8 +31,10 @@ import javax.ws.rs.core.GenericType;
  */
 @ManagedBean(name = "user_controller")
 @SessionScoped
-public class UserController implements Serializable {
+public class UserController implements Serializable{
 
+    @EJB
+    private dealWithInterviews dealWithInterviews;
     @EJB
     private dealWithJobs dealWithJobs;
 
@@ -41,7 +48,6 @@ public class UserController implements Serializable {
     private List<Job> allJobs;
     private List<Job> appliedJobs;
 
-
     public UserController() {
 
     }
@@ -51,7 +57,12 @@ public class UserController implements Serializable {
         dealWithUsers.userLogout();
     }
 
+    
+    public List<Interview> getInterviews(String username) {
+        return dealWithInterviews.getInterviewByUsername(username);
+    }
     public List<Job> getAppliedJobsWithUsername(String username) {
+       
         currentViews = viewingCounter.getViews();
         allJobs = dealWithJobs.getAllJobs();
         appliedJobs = dealWithUsers.findUserByUsername(username).getAppliedJobs();
@@ -85,11 +96,11 @@ public class UserController implements Serializable {
         return "classified/jsf_user_overview.xhtml?faces-redirect=true";
     }
 
-    public String unapplyJob(String username, Job job) {
+        
+    public String unapplyJob(String username, Job job){
         dealWithUsers.removeJobFromUserByUsername(username, job);
         return "classified/jsf_user_overview.xhtml?faces-redirect=true";
     }
-
     public int getCurrentViews() {
         return currentViews;
     }

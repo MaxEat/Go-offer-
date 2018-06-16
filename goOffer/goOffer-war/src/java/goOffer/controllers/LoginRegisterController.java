@@ -80,6 +80,8 @@ public class LoginRegisterController implements Serializable {
     }
 
     public String callWebServiceLogin() {
+        
+ 
         if (loginUser(username, password)) {
             viewingCounter.moreViews();
             identity = "user"; 
@@ -94,6 +96,8 @@ public class LoginRegisterController implements Serializable {
     }
 
     public String callWebServiceRegisterUser() {
+        
+   
         if (registerUser(username, password).equals("user exsit")) {
             return "jsf_user_register.xhtml?redirect=true";
         } else {
@@ -104,6 +108,7 @@ public class LoginRegisterController implements Serializable {
     }
 
     public String callWebServiceRegisterCompany() {
+        
         if (registerCompany(username, password).equals("company exsit")) {
             return "classified/jsf_company_overview.xhtml?redirect=true";
         } else {
