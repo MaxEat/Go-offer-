@@ -65,17 +65,19 @@ public class dealWithCompanies {
         Company c = getCompanyByUsername(username);
         c.removeJobFromCompany(jobID);
     }
+    
+    public void updateProfile(String username, String password, String address, String name, int population) {
+        Company c = getCompanyByUsername(username);
+        c.setCompanyName(name);
+        c.setPassword(password);
+        c.setAddress(address);
+        c.setPopulation(population);
+    }
 
     public void setAddressByUserName(String address, String name) {
        
         Company c = getCompanyByUsername(name);
         c.setAddress(address);
-//        em.find(Company, name)
-//        em.createNamedQuery("Company.updateAddress")
-//                .setParameter("address", address)
-//                .setParameter("username", name)
-//                .executeUpdate();
-      
     }
 
     public void setPopulationByUserName(int number, String name) {

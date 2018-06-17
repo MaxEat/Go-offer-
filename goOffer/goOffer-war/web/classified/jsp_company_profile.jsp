@@ -16,12 +16,12 @@
         <%
             Company c = (Company) request.getAttribute("currentCompany");
         %>
-        <form action="servlet_company_adjust_profile" method="POST">
-            Username: <input type="text" value="<%=c.getUsername()%>" readonly /><br>
-            Password: <input type="password" value="<%=c.getPassword()%>"/><br>
-            Name: <input type="text" value="<%=c.getCompanyName()%>"/><br>
-            Address: <input type="text" value="<%=c.getAddress()%>"/><br>
-            Population <input type="text" value="<%=c.getPopulation()%>"/><br>
+        <form action="../servlet_company_adjust_profile" method="POST">
+            Username: <input type="text" value="<%=c.getUsername()%>" name="companyUsername" readonly /><br>
+            Password: <input type="password" value="<%=c.getPassword()%>" name="companyPassword" /><br>
+            Name: <input type="text" value="<%=c.getCompanyName()%>" name="companyName"/><br>
+            Address: <input type="text" value="<%=c.getAddress()%>" name="companyAddress"/><br>
+            Population <input type="text" value="<%=c.getPopulation()%>" name="companyPopulation"/><br>
             <input type="submit" value="Update Profile">
         </form>
     </body>

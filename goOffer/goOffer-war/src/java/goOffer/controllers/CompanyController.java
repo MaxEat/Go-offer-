@@ -55,10 +55,10 @@ public class CompanyController implements Serializable {
     public void editProfile(String currentUsername) throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext ec = facesContext.getExternalContext();
-        HttpServletRequest request = (HttpServletRequest) ec.getRequest();
-        request.setAttribute("username", currentUsername);
-//        ec.redirect("../servlet_company_profile/username?"+currentUsername);
-        ec.redirect("../servlet_company_profile");
+//        HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+//        request.setAttribute("username", currentUsername);
+        ec.redirect("../servlet_company_profile?username="+currentUsername);
+//        ec.redirect("../servlet_company_profile");
     }
 
     public Long getJobId() {

@@ -40,8 +40,7 @@ public class servlet_company_profile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String currentUsername = (String) request.getAttribute("username");
+            String currentUsername = (String) request.getParameter("username");
             System.out.println("---------------->"+ currentUsername);
             Company c = dealWithCompanies.getCompanyByUsername(currentUsername);
             request.setAttribute("currentCompany", c);
@@ -62,7 +61,6 @@ public class servlet_company_profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.getWriter().write(request.getParameter("username"));
         processRequest(request, response);
         
     }

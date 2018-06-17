@@ -5,8 +5,14 @@
  */
 package goOffer.servlets;
 
+import goOffer.ejbs.dealWithCompanies;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author jiahao pan
  */
 public class servlet_company_adjust_profile extends HttpServlet {
+
+    dealWithCompanies dealWithCompanies = lookupdealWithCompaniesBean();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,6 +39,8 @@ public class servlet_company_adjust_profile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
+            dealWithCompanies.updateProfile(username, password, address, name, 0);
             request.getRequestDispatcher("jsp_company_profile.jsp").forward(request, response);
         }
     }
@@ -73,5 +83,15 @@ public class servlet_company_adjust_profile extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private dealWithCompanies lookupdealWithCompaniesBean() {
+        try {
+            Context c = new InitialContext();
+            return (dealWithCompanies) c.lookup("java:global/goOffer/goOffer-ejb/dealWithCompanies!goOffer.ejbs.dealWithCompanies");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
 
 }
