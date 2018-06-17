@@ -9,12 +9,11 @@
         </f:metadata>
     </h:head>
     <h:body>
-<<<<<<< HEAD
         
         <h:outputText value="Hello, #{login_overview.username} !"/>
         <h:button value="Expiring Jobs" outcome="jsf_user_expiring_job_list" />     
         <h:button value="My Interview" outcome="jsf_user_interview" />  
-=======
+
 
         <h:outputText value="Hello, #{login_overview.username} !"/> 
         <h:form>
@@ -29,7 +28,6 @@
             <h:outputText value="Current Advertisement is : #{admin_controller.getCurrentAd()}"/>
         </h:form>
 
->>>>>>> 576a711fb2238f5f858681c2987655647b14ced0
         <f:view>
             <h:form>
                 <h:dataTable rendered="true" border="1" value="#{user_controller.getAppliedJobsWithUsername(login_overview.username)}" var="job">

@@ -38,7 +38,7 @@ public class MessageReceiver implements MessageListener {
         TextMessage textMessage = (TextMessage) message;
            try {
                String text = textMessage.getText();
-               String[] text_array = text.split(" ");
+               String[] text_array = text.split(",");
                String date = text_array[0]; 
                String username = text_array[1];
                String jobid = text_array[2];

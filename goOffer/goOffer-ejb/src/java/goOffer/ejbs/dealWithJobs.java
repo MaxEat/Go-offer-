@@ -67,7 +67,6 @@ public class dealWithJobs {
                 .getResultList();
         
     }
-<<<<<<< HEAD
     
     public List<Usertable> getApplicantsByJobID(long id) {
         Job job = (Job) em.createNamedQuery("Job.findById")
@@ -78,7 +77,4 @@ public class dealWithJobs {
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-=======
-   
->>>>>>> 576a711fb2238f5f858681c2987655647b14ced0
 }

@@ -7,7 +7,6 @@ package goOffer.ejbs;
 
 import goOffer.entities.Job;
 import goOffer.entities.Usertable;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.Stateful;
