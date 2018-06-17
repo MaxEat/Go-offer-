@@ -5,31 +5,60 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <style>
+        .popup-panel-overlay{ background-color: rgba(0,0,0,0.5); 
+                              position: absolute;
+                              top: 0px; 
+                              left: 0px; 
+                              width: 100%; 
+                              height: 100%; }
+        .popup-panel{ margin: 100px;
+                      background-color: white; 
+                      padding: 20px; 
+                      border-radius: 5px;
+                      border: 1px solid #DDD; } 
+        </style>
         <f:metadata>
             <f:viewAction action="#{login_overview.isLoggedInForward()}" />
         </f:metadata>
     </h:head>
     <h:body>
         <f:view>
-            <h:button value="Register Now" outcome="jsf_user_register" />
+            
             <h:form>
                 <br/>
-                <h:outputText value="Username:"/>
-                <br/>
-                <h:inputText id = "username" value="#{login_overview.username}">
-                    <f:validator validatorId="goOffer.validators.UsernameValidator" />
-                </h:inputText>
-                <h:message for="username" style="color:red" />
-                <br/>
-                <h:outputText value="Password:"/>
-                <br/>
-                <h:inputSecret value="#{login_overview.password}" >
-                    <f:validateLength minimum = "6" maximum = "10"/>
-                </h:inputSecret>
-                <br/>
+                <h:panelGrid style="float:left; border:1">
+                    
+                    <h:outputText value="Username:"/>
+                    
+                    <h:inputText id = "username" value="#{login_overview.username}">
+                        <f:validator validatorId="goOffer.validators.UsernameValidator" />
+                    </h:inputText>
+                    <h:message for="username" style="color:red" />
+                    <br/>
+                    <h:outputText value="Password:"/>
+                    
+                    <h:inputSecret id = "password" value="#{login_overview.password}" >
+                        <f:validateLength minimum = "6" maximum = "10"/>
+                    </h:inputSecret>
+                    <br/>
 
-                <h:commandButton value="Login" action="#{login_overview.callWebServiceLogin()}" />
-                <h:outputText value="#{login_overview.result}"/>
+                    <h:commandButton value="Login" action="#{login_overview.callWebServiceLogin()}" >
+                        <f:ajax execute = "username password" render="@form"/>
+                    </h:commandButton>
+                    <h:commandButton value="Register" action="jsf_user_register" />
+                    <br/>
+                    <h:outputText value="#{login_overview.result}"/>
+                </h:panelGrid>
+                
+                <h:panelGroup layout="block" styleClass="popup-panel-overlay" rendered="#{login_overview.showPopup}">
+                    <div class="popup-panel">
+                        You have typed in wrong username or password<br/> 
+                        <h:commandButton value="OK" action="#{login_overview.hide()}"> 
+                            <f:ajax render="@form"/>
+                        </h:commandButton> </div> 
+                </h:panelGroup>
+                
             </h:form>
         </f:view>
     </h:body>

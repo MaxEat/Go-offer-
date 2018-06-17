@@ -42,21 +42,6 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/goOffer/controllers"/>
         <delete dir="${build.generated.dir}/jax-wsCache/LoginRegisterService"/>
     </target>
-    <target name="wsimport-client-LoginRegisterService_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/LoginRegisterService_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LoginRegisterService_1" destdir="${build.generated.dir}/jax-wsCache/LoginRegisterService_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/LoginRegisterService_1/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/LoginRegisterService/LoginRegisterService?wsdl" xnocompile="true" xendorsed="true" package="goOffer.controllers">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/LoginRegisterService_1/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/LoginRegisterService_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/LoginRegisterService_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-LoginRegisterService_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/goOffer/controllers"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/LoginRegisterService_1"/>
-    </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-LoginRegisterService, wsimport-client-LoginRegisterService_1"/>
+
+    <target name="wsimport-client-generate" depends="wsimport-client-LoginRegisterService"/>
 </project>

@@ -37,6 +37,14 @@
         <filter-name>IdentityFilter</filter-name>
         <url-pattern>/classified/*</url-pattern>
     </filter-mapping>
+    <servlet>
+        <servlet-name>servlet_company_profile</servlet-name>
+        <servlet-class>goOffer.servlets.servlet_company_profile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_company_adjust_profile</servlet-name>
+        <servlet-class>goOffer.servlets.servlet_company_adjust_profile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servlet_company_overview</servlet-name>
         <url-pattern>/servlet_company_overview</url-pattern>
@@ -53,6 +61,14 @@
         <servlet-name>Faces Servlet</servlet-name>
         <!--<url-pattern>/faces/*</url-pattern>-->
         <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_company_profile</servlet-name>
+        <url-pattern>/servlet_company_profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_company_adjust_profile</servlet-name>
+        <url-pattern>/servlet_company_adjust_profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

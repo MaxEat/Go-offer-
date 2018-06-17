@@ -5,14 +5,7 @@
  */
 package goOffer.ejbs;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
-import goOffer.entities.Company;
 import goOffer.entities.Interview;
-import goOffer.entities.Job;
-import goOffer.entities.Usertable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;

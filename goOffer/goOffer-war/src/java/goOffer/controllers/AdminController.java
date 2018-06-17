@@ -9,8 +9,10 @@ import goOffer.Rest.entities.Ad;
 import goOffer.Rest.entities.Message;
 import goOffer.clientREST.AdClient;
 import goOffer.clientREST.MessageClient;
+import goOffer.ejbs.ViewingCounter;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.GenericType;
@@ -22,6 +24,11 @@ import javax.ws.rs.core.GenericType;
 @ManagedBean(name = "admin_controller")
 @SessionScoped
 public class AdminController implements Serializable{
+
+    @EJB
+    private ViewingCounter viewingCounter;
+    
+    private int currentViews = 100;
     
     private MessageClient messageClient = new MessageClient();
     private AdClient adClient = new AdClient();
@@ -33,6 +40,9 @@ public class AdminController implements Serializable{
     private String currentAdString;
     private String newAdContent = "";
     private String adID;
+    
+    public AdminController () {
+    }
 
     public String getNewAdContent() {
         return newAdContent;
@@ -57,6 +67,8 @@ public class AdminController implements Serializable{
     }
 
     public List<Ad> getAdLists() {
+        currentViews = viewingCounter.getViews();
+        System.out.println("---------------->" + viewingCounter.getViews());
         GenericType<List<Ad>> gt = new GenericType<List<Ad>>() {
         };
         this.setAdLists(adClient.findAll_XML(gt));
@@ -103,6 +115,10 @@ public class AdminController implements Serializable{
 
     public void setMessage(Message message) {
         this.message = message;
+    }
+
+    public int getCurrentViews() {
+        return currentViews;
     }
     
 }

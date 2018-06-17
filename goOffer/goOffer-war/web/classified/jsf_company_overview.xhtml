@@ -12,6 +12,10 @@
         <h:outputText value="Name: #{company_overview.getCompanyNameByUsername(login_overview.username)}"/>
         <br/>
         <h:outputText value="Address: #{company_overview.getCompanyAddressByUsername(login_overview.username)}"/>
+        <br/>
+        <h:form>
+            <h:commandButton value="Edit profile" action="#{company_overview.editProfile(login_overview.username)}" />
+        </h:form>
         <f:view>
             <h:form id="dataTableForm">
                 <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.getJobsByUsername(login_overview.username)}" var="job">

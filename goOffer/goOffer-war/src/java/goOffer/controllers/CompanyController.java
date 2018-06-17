@@ -7,24 +7,20 @@ package goOffer.controllers;
 
 import goOffer.ejbs.dealWithCompanies;
 import goOffer.ejbs.dealWithJobs;
-import goOffer.ejbs.dealWithUsers;
-import goOffer.entities.Company;
 import goOffer.entities.Usertable;
 import goOffer.entities.Job;
 import goOffer.entities.Job.jobType;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -40,7 +36,6 @@ public class CompanyController implements Serializable {
     @EJB
     private dealWithCompanies dealWithCompanies;
 
-
     private Boolean addButtonShown = true;
     private Boolean addFormShown = false;
 
@@ -52,10 +47,18 @@ public class CompanyController implements Serializable {
     private String jobDescription;
     private Date jobExpirationDate;
     private jobType chosenType;
-    
-    public CompanyController(){
+
+    public CompanyController() {
         types = jobType.values();
-        
+    }
+
+    public void editProfile(String currentUsername) throws IOException {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext ec = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+        request.setAttribute("username", currentUsername);
+//        ec.redirect("../servlet_company_profile/username?"+currentUsername);
+        ec.redirect("../servlet_company_profile");
     }
 
     public Long getJobId() {
@@ -65,23 +68,24 @@ public class CompanyController implements Serializable {
     public void setJobId(Long jobId) {
         this.jobId = jobId;
     }
+
     public String applicantsOverview(Long Id) {
         jobId = Id;
         return "/jsf_company_overview_applicants.xhtml";
     }
+
     public List<Job> getJobsByUsername(String username) {
         return dealWithCompanies.getCompanyByUsername(username).getJobs();
     }
-    
+
     public String getCompanyNameByUsername(String username) {
         return dealWithCompanies.getCompanyByUsername(username).getCompanyName();
     }
-    
+
     public String getCompanyAddressByUsername(String username) {
         return dealWithCompanies.getCompanyByUsername(username).getAddress();
     }
-            
-            
+
     public String addButtonListener() {
         addButtonShown = false;
         addFormShown = true;
@@ -98,7 +102,7 @@ public class CompanyController implements Serializable {
         newjob.setJobName(jobName);
         newjob.setExpirationDate(jobExpirationDate);
         newjob.setType(chosenType);
-        
+
         dealWithCompanies.addJobToCompanyByUsername(username, newjob);
 
         return "classified/jsf_company_overview.xhtml?faces-redirect=true";
@@ -114,7 +118,6 @@ public class CompanyController implements Serializable {
         return "classified/jsf_company_overview.xhtml?faces-redirect=true";
     }
 
-   
     public jobType getChosenType() {
         return chosenType;
     }
@@ -186,7 +189,7 @@ public class CompanyController implements Serializable {
         return "returnFromCompanyFlow";
     }
 
-    public List<Usertable> seeApplicant(long jobId ) {
+    public List<Usertable> seeApplicant(long jobId) {
         return dealWithJobs.getApplicantsByJobID(jobId);
     }
 }

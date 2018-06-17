@@ -27,15 +27,31 @@ public class LoginRegisterController implements Serializable {
     @EJB
     private ViewingCounter viewingCounter;
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_53547/LoginRegisterService/LoginRegisterService.wsdl")
     private LoginRegisterService_Service service;
 
     private String username;
     private String password;
     private String result;
     private String identity;
-
+    private boolean showPopup; 
+    
     public LoginRegisterController() {
+    }
+    
+    public void hide(){
+        showPopup=false; 
+    } 
+    
+    public void show(){
+        showPopup = true;
+    }
+    public boolean isShowPopup() {
+        return showPopup; 
+    }
+    
+    public void setShowPopup(boolean showPopup) { 
+        this.showPopup = showPopup; 
     }
 
     public String getUsername() {
@@ -57,7 +73,8 @@ public class LoginRegisterController implements Serializable {
     public void logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("../jsf_user_login.xhtml");
+            viewingCounter.lessViews();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("jsf_user_login.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(LoginRegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,18 +97,21 @@ public class LoginRegisterController implements Serializable {
     }
 
     public String callWebServiceLogin() {
-        
  
         if (loginUser(username, password)) {
             viewingCounter.moreViews();
             identity = "user"; 
+            this.hide();
             return "/classified/jsf_user_overview.xhtml?redirect=true";
         }
         if (loginCompany(username, password)) {
+            viewingCounter.moreViews();
             identity = "company"; 
+            this.hide();
             return "/classified/jsf_company_overview.xhtml?redirect=true";
         } else {
-            return "test_error.xhtml";
+            this.show();
+            return "/classified/jsf_user_login.xhtml?redirect=true";
         }
     }
 
@@ -101,6 +121,7 @@ public class LoginRegisterController implements Serializable {
         if (registerUser(username, password).equals("user exsit")) {
             return "jsf_user_register.xhtml?redirect=true";
         } else {
+            viewingCounter.moreViews();
             identity = "user"; 
             return "classified/jsf_user_overview.xhtml?redirect=true";
         }
@@ -112,6 +133,7 @@ public class LoginRegisterController implements Serializable {
         if (registerCompany(username, password).equals("company exsit")) {
             return "classified/jsf_company_overview.xhtml?redirect=true";
         } else {
+            viewingCounter.moreViews();
             identity = "company"; 
             return "companyCreate";
         }

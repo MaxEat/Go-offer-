@@ -5,10 +5,6 @@
  */
 package goOffer.controllers;
 
-import goOffer.Rest.entities.Ad;
-import goOffer.Rest.entities.Message;
-import goOffer.clientREST.AdClient;
-import goOffer.clientREST.MessageClient;
 import goOffer.ejbs.ViewingCounter;
 import goOffer.ejbs.dealWithInterviews;
 import goOffer.ejbs.dealWithJobs;
@@ -17,13 +13,9 @@ import goOffer.entities.Interview;
 import goOffer.entities.Job;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.jms.MessageListener;
-import javax.ws.rs.core.GenericType;
 
 /**
  *
@@ -41,10 +33,6 @@ public class UserController implements Serializable{
     @EJB
     private dealWithUsers dealWithUsers;
 
-    @EJB
-    private ViewingCounter viewingCounter;
-
-    private int currentViews;
     private List<Job> allJobs;
     private List<Job> appliedJobs;
 
@@ -53,7 +41,6 @@ public class UserController implements Serializable{
     }
 
     public void logout() {
-        viewingCounter.lessViews();
         dealWithUsers.userLogout();
     }
 
@@ -63,7 +50,6 @@ public class UserController implements Serializable{
     }
     public List<Job> getAppliedJobsWithUsername(String username) {
        
-        currentViews = viewingCounter.getViews();
         allJobs = dealWithJobs.getAllJobs();
         appliedJobs = dealWithUsers.findUserByUsername(username).getAppliedJobs();
         return appliedJobs;
@@ -100,9 +86,6 @@ public class UserController implements Serializable{
     public String unapplyJob(String username, Job job){
         dealWithUsers.removeJobFromUserByUsername(username, job);
         return "classified/jsf_user_overview.xhtml?faces-redirect=true";
-    }
-    public int getCurrentViews() {
-        return currentViews;
     }
 
     public List<Job> getAllJobs() {
