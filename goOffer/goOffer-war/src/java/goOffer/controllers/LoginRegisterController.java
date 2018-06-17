@@ -27,7 +27,7 @@ public class LoginRegisterController implements Serializable {
     @EJB
     private ViewingCounter viewingCounter;
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_53547/LoginRegisterService/LoginRegisterService.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/LoginRegisterService/LoginRegisterService.wsdl")
     private LoginRegisterService_Service service;
 
     private String username;
@@ -70,10 +70,10 @@ public class LoginRegisterController implements Serializable {
     public String isLoggedInForward() {
         if (isLoggedIn()) {
             if ("user".equals(identity)) {
-                return "classified/jsf_user_overview.xhtml?redirect=true";
+                return "/classified/jsf_user_overview.xhtml?redirect=true";
             }
             if ("company".equals(identity)) {
-                return "classified/jsf_company_overview.xhtml?redirect=true";
+                return "/classified/jsf_company_overview.xhtml?redirect=true";
             }
         }
         return null;
@@ -85,11 +85,11 @@ public class LoginRegisterController implements Serializable {
         if (loginUser(username, password)) {
             viewingCounter.moreViews();
             identity = "user"; 
-            return "classified/jsf_user_overview.xhtml?redirect=true";
+            return "/classified/jsf_user_overview.xhtml?redirect=true";
         }
         if (loginCompany(username, password)) {
             identity = "company"; 
-            return "classified/jsf_company_overview.xhtml?redirect=true";
+            return "/classified/jsf_company_overview.xhtml?redirect=true";
         } else {
             return "test_error.xhtml";
         }
@@ -113,7 +113,7 @@ public class LoginRegisterController implements Serializable {
             return "classified/jsf_company_overview.xhtml?redirect=true";
         } else {
             identity = "company"; 
-            return "classified/jsf_company_overview.xhtml?redirect=true";
+            return "companyCreate";
         }
     }
 

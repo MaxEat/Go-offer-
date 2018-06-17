@@ -11,7 +11,7 @@
         <f:view>
             <h:outputText value="#{company_overview.jobId}"></h:outputText>
             <h:form id="dataTableForm">
-                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.seeApplicant()}" var="user">
+                <h:dataTable rendered="true" border="1" id="dataTableTest" value="#{company_overview.seeApplicant(company_overview.jobId)}" var="user">
                     <f:facet name="header">
                         <h:outputText value="Applicants:" />
                     </f:facet>
@@ -22,9 +22,9 @@
                         <h:outputText value="#{user.username}"/>
                     </h:column>
                     <h:column>
-                        <h:inputText id = "test" value="#{messageModel.msgText}">
-                        </h:inputText
-                        
+                        <h:inputText  t:type="datetime-local" value="#{messageModel.interviewDate}">
+                            <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm"/>
+                        </h:inputText>
                         <h:commandButton value="invite interview" action="#{messageController.sendMsg(user.username, company_overview.jobId)}"/>
                     </h:column>   
                 </h:dataTable>

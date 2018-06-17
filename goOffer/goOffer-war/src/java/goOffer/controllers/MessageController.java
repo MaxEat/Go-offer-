@@ -48,7 +48,7 @@ public class MessageController {
     
     public String sendMsg(String username, Long jobID) {
         result = "successfully added";
-        sendJMSMessageToMytopic(messageModel.getMsgText() + " " + username + " " + String.valueOf(jobID));
+        sendJMSMessageToMytopic(messageModel.getInterviewDate().toString()+ "," + username + "," + String.valueOf(jobID));
         return "jsf_company_overview_applicants.xhtml";
        }
 

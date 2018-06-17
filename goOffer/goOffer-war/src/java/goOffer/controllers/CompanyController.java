@@ -9,6 +9,7 @@ import goOffer.ejbs.dealWithCompanies;
 import goOffer.ejbs.dealWithJobs;
 import goOffer.ejbs.dealWithUsers;
 import goOffer.entities.Company;
+import goOffer.entities.Usertable;
 import goOffer.entities.Job;
 import goOffer.entities.Job.jobType;
 import java.io.Serializable;
@@ -37,9 +38,6 @@ public class CompanyController implements Serializable {
     private dealWithJobs dealWithJobs;
 
     @EJB
-    private dealWithUsers dealWithUsers;
-
-    @EJB
     private dealWithCompanies dealWithCompanies;
 
 
@@ -49,6 +47,7 @@ public class CompanyController implements Serializable {
     private jobType[] types;
 
     private String jobName;
+    private Long jobId;
     private String jobLocation;
     private String jobDescription;
     private Date jobExpirationDate;
@@ -58,7 +57,18 @@ public class CompanyController implements Serializable {
         types = jobType.values();
         
     }
-    
+
+    public Long getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
+    }
+    public String applicantsOverview(Long Id) {
+        jobId = Id;
+        return "/jsf_company_overview_applicants.xhtml";
+    }
     public List<Job> getJobsByUsername(String username) {
         return dealWithCompanies.getCompanyByUsername(username).getJobs();
     }
@@ -170,10 +180,13 @@ public class CompanyController implements Serializable {
     }
 
     public String initialAddressAndPeople(String companyName, String address, int population, String username) {
-   //     dealWithCompanies.setCompanyNameByUserName(companyName, username);
+        dealWithCompanies.setCompanyNameByUserName(companyName, username);
         dealWithCompanies.setAddressByUserName(address, username);
         dealWithCompanies.setPopulationByUserName(population, username);
         return "returnFromCompanyFlow";
     }
 
+    public List<Usertable> seeApplicant(long jobId ) {
+        return dealWithJobs.getApplicantsByJobID(jobId);
+    }
 }
