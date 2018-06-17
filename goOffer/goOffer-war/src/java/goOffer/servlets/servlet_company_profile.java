@@ -41,7 +41,6 @@ public class servlet_company_profile extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String currentUsername = (String) request.getParameter("username");
-            System.out.println("---------------->"+ currentUsername);
             Company c = dealWithCompanies.getCompanyByUsername(currentUsername);
             request.setAttribute("currentCompany", c);
 

@@ -16,7 +16,7 @@
         <%
             Company c = (Company) request.getAttribute("currentCompany");
         %>
-        <form action="../servlet_company_adjust_profile" method="POST">
+        <form action="servlet_company_adjust_profile" method="POST">
             Username: <input type="text" value="<%=c.getUsername()%>" name="companyUsername" readonly /><br>
             Password: <input type="password" value="<%=c.getPassword()%>" name="companyPassword" /><br>
             Name: <input type="text" value="<%=c.getCompanyName()%>" name="companyName"/><br>

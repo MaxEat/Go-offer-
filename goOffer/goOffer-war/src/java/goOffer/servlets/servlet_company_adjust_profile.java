@@ -39,9 +39,13 @@ public class servlet_company_adjust_profile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            dealWithCompanies.updateProfile(username, password, address, name, 0);
-            request.getRequestDispatcher("jsp_company_profile.jsp").forward(request, response);
+            String username = request.getParameter("companyUsername");
+            String password = request.getParameter("companyPassword");
+            String address = request.getParameter("companyAddress");
+            String name = request.getParameter("companyName");
+            int population = Integer.parseInt(request.getParameter("companyPopulation"));
+            dealWithCompanies.updateProfile(username, password, address, name, population);
+            request.getRequestDispatcher("classified/jsf_company_overview.xhtml").forward(request, response);
         }
     }
 
